@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="초기 세팅">
+      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/header.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/components/Header.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/layout/AppLayout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/pages/AmorePartyPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/setupTests.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="37Fa1C9RUe5pPvapZRLKaOH9jit" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript Debug.localhost:5173.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "/Users/emfpdlzj/Desktop/Amore-frontend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/amore-app/src/assets/icon" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="localhost:5173" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:5173/">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.localhost:5173" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-WS-252.27397.92" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="" />
+      <created>1766501056033</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1766501056033</updated>
+      <workItem from="1766501057419" duration="1336000" />
+      <workItem from="1766506178589" duration="216000" />
+      <workItem from="1766682974625" duration="1428000" />
+      <workItem from="1766936872031" duration="3600000" />
+    </task>
+    <task id="LOCAL-00001" summary="초기 세팅">
+      <option name="closed" value="true" />
+      <created>1766505991951</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1766505991951</updated>
+    </task>
+    <task id="LOCAL-00002" summary="초기 세팅">
+      <option name="closed" value="true" />
+      <created>1766506331294</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1766506331294</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="초기 세팅" />
+    <option name="LAST_COMMIT_MESSAGE" value="초기 세팅" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/amore-app/vite.config.js</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
