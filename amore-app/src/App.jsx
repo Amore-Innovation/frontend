@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AppLayout from "./layout/AppLayout.jsx";
 import AmorePartyPage from "./pages/AmorePartyPage.jsx";
 
@@ -6,11 +6,11 @@ export default function App() {
     return (
         <Routes>
             <Route element={<AppLayout />}>
-                <Route path="/" element={<AmorePartyPage />} />
-                <Route path="/agents" element={<div>agents</div>} />
-                <Route path="/logs" element={<div>logs</div>} />
-                <Route path="/queue" element={<div>queue</div>} />
-                <Route path="/history" element={<div>history</div>} />
+                <Route path="/" element={<Navigate to="/charts" replace />} />
+                <Route path="/charts" element={<AmorePartyPage />} />
+                <Route path="/agents" element={<AmorePartyPage />} />
+                <Route path="/logs" element={<AmorePartyPage />} />
+                <Route path="/queue" element={<AmorePartyPage />} />
             </Route>
         </Routes>
     );

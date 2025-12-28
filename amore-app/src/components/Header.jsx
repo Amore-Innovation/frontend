@@ -1,28 +1,48 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import headerIcon from "../assets/icon/header.svg";
 
 const tabs = [
-    { label: "성과 분석 차트", to: "/" },        // 루트를 성과분석으로
+    { label: "성과 분석 차트", to: "/charts" },
     { label: "에이전트 상태 요약", to: "/agents" },
-    { label: "AI 자동 운영 로그", to: "/logs" },
-    { label: "AI 전략 대기열", to: "/queue" },
-    { label: "AI 중단 / 조정 이력", to: "/history" },
+    { label: "에이전트 전략 대기열", to: "/logs" },
+    { label: "에이전트 자동 운영 로그    ", to: "/queue" },
 ];
 
 export default function Header() {
-    return (
-        <header className="fixed top-0 left-0 right-0 z-50 h-[72px] bg-[#001A4C]">
-            <div className="h-full flex items-center gap-10 px-10">
-                {/* logo */}
-                <img src={headerIcon} alt="AMORE PARTY" className="h-60px w-auto select-none" />
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
 
-                {/* tabs */}
+    const handleLogoClick = () => {
+        if (pathname !== "/charts") {
+            navigate("/charts");
+            return;
+        }
+        // 이미 charts면 맨 위로
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    return (
+        <header  className="fixed top-0 left-0 right-0 z-50 h-[72px] bg-[#001A4C]">
+            <div className="h-full flex items-center justify-between container-300">
+                <button
+                    type="button"
+                    onClick={handleLogoClick}
+                    className="flex items-center"
+                    aria-label="Go to top"
+                >
+                    <img
+                        src={headerIcon}
+                        alt="AMORE PARTY"
+                        className="h-[60px] w-auto select-none"
+                    />
+                </button>
+                <div className="flex-1" />
                 <nav className="flex items-center gap-8">
                     {tabs.map((t) => (
                         <NavLink
                             key={t.to}
                             to={t.to}
-                            end={t.to === "/"}   // 루트(/)가 다른 경로에서 active 안 되게
+                            end
                             className={({ isActive }) =>
                                 [
                                     "relative inline-flex items-center h-[72px]",
