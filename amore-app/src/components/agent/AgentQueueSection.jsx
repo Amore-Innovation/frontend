@@ -140,7 +140,7 @@ export default function AgentQueueSection() {
                             className="absolute left-0"
                             style={{ top: 44, width: GRID_W, height: Math.max(GRID_H, VIEW_H) }}
                         >
-                            {/* ✅ 배경 레이어 (음영/격자/행라인) */}
+                            {/*  배경 레이어 (음영/격자/행라인) */}
                             <div className="absolute inset-0 z-0">
                                 {/* 지난 시간 음영 */}
                                 <div
