@@ -101,7 +101,7 @@ export default function AmorePartyPage() {
                     <div className={CONTENT_WRAP}>
                         <section id="section-queue" className="scroll-mt-[92px]">
                             <h1 className="text-2xl font-semibold">에이전트 전략 대기열</h1>
-                            <div className="mt-4 h-[260px] rounded-xl border bg-white" />
+                            <div className="mt-4 h-[600px] rounded-xl border bg-white" />
                         </section>
                     </div>
 

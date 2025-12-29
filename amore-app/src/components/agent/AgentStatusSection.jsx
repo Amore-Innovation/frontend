@@ -2,7 +2,7 @@
 import aiIcon from "../../assets/icon/ai.svg";
 import navigatePrev from "../../assets/icon/NavigatePrevious.svg";
 import navigateNext from "../../assets/icon/NavigateNext.svg";
-import Brand from "../ui/brand.jsx";
+import Brand from "../ui/Brand.jsx";
 
 import iconSunny from "../../assets/icon/Sunny.svg";
 import iconActivate from "../../assets/icon/activate.svg";

@@ -1,5 +1,5 @@
 // AgentAutoLogSection.jsx
-import Brand from "../ui/brand.jsx";
+import Brand from "../ui/Brand.jsx";
 import logIcon from "../../assets/icon/log.svg";
 import arrowIcon from "../../assets/icon/right_arrow.png"
 import arrowDown from "../../assets/icon/under_arrow.png"
