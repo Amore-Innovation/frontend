@@ -8,7 +8,11 @@ import AgentAutoLogSection from "../components/agent/AgentAutoLogSection.jsx";
 
 export default function AmorePartyPage() {
     const navigate = useNavigate();
-    const { pathname } = useLocation();
+    const location = useLocation();
+    const { pathname } = location;
+
+    const isProgrammaticScrollRef = useRef(false);
+    const scrollTimeoutRef = useRef(null);
 
     const sections = useMemo(
         () => [
@@ -27,14 +31,29 @@ export default function AmorePartyPage() {
     }, [sections]);
 
     useEffect(() => {
-        const id = pathToId[pathname];
-        if (!id) return;
+        const intent = location.state?.scrollTo;
+        if (!intent) return; // ✅ 스크롤로 URL이 바뀐 경우엔 스크롤하지 않음
 
-        const el = document.getElementById(id);
-        if (!el) return;
+        // ✅ 프로그램 스크롤 시작
+        isProgrammaticScrollRef.current = true;
+        if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
 
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, [pathname, pathToId]);
+        if (intent === "top") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            const id = pathToId[pathname];
+            const el = id ? document.getElementById(id) : null;
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        // ✅ 0.8초 정도는 observer가 URL replace 못하게
+        scrollTimeoutRef.current = setTimeout(() => {
+            isProgrammaticScrollRef.current = false;
+        }, 800);
+
+        // ✅ state 제거(재렌더 시 중복 실행 방지)
+        navigate(pathname, { replace: true, state: null });
+    }, [pathname, pathToId, location.state, navigate]);
 
     const rafRef = useRef(null);
 
@@ -45,8 +64,9 @@ export default function AmorePartyPage() {
 
         const observer = new IntersectionObserver(
             (entries) => {
-                if (rafRef.current) cancelAnimationFrame(rafRef.current);
+                if (isProgrammaticScrollRef.current) return; // ✅ 핵심
 
+                if (rafRef.current) cancelAnimationFrame(rafRef.current);
                 rafRef.current = requestAnimationFrame(() => {
                     let best = null;
                     for (const e of entries) {
@@ -58,7 +78,7 @@ export default function AmorePartyPage() {
                     const nextPath = idToPath.get(best.target.id);
                     if (!nextPath || nextPath === pathname) return;
 
-                    navigate(nextPath, { replace: true });
+                    navigate(nextPath, { replace: true, state: null }); // ✅ state 없이
                 });
             },
             {
@@ -69,7 +89,6 @@ export default function AmorePartyPage() {
         );
 
         targets.forEach((el) => observer.observe(el));
-
         return () => {
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
             observer.disconnect();

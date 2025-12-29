@@ -13,12 +13,7 @@ export default function Header() {
     const { pathname } = useLocation();
 
     const handleLogoClick = () => {
-        if (pathname !== "/charts") {
-            navigate("/charts");
-            return;
-        }
-        // 이미 charts면 맨 위로
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        navigate("/charts", { state: { scrollTo: "top" } });
     };
 
     return (
@@ -42,6 +37,7 @@ export default function Header() {
                         <NavLink
                             key={t.to}
                             to={t.to}
+                            state={{ scrollTo: t.to }}   //  클릭 이동임을 표시
                             end
                             className={({ isActive }) =>
                                 [
