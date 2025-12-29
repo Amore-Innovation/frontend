@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="chore: 오탈자 수정">
-      <change afterPath="$PROJECT_DIR$/amore-app/src/components/agent/AgentQueueSection.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/components/agent/QueueCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/agentQueueItems.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/utils/queuePlacement.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/utils/timeKst.js" afterDir="false" />
+    <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="chore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/amore-app/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/Header.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/amore-app/src/pages/AmorePartyPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/pages/AmorePartyPage.jsx" afterDir="false" />
@@ -105,7 +100,7 @@
       <workItem from="1766506178589" duration="216000" />
       <workItem from="1766682974625" duration="1428000" />
       <workItem from="1766936872031" duration="21813000" />
-      <workItem from="1766990860917" duration="3568000" />
+      <workItem from="1766990860917" duration="4098000" />
     </task>
     <task id="LOCAL-00001" summary="초기 세팅">
       <option name="closed" value="true" />
@@ -195,7 +190,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766991163987</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat: 에이전트 전략 대기열 구현">
+      <option name="closed" value="true" />
+      <created>1766994493398</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1766994493398</updated>
+    </task>
+    <task id="LOCAL-00013" summary="chore">
+      <option name="closed" value="true" />
+      <created>1766994628867</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1766994628867</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,7 +223,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="dev" />
+                        <option value="origin/dev" />
                       </list>
                     </value>
                   </entry>
@@ -233,7 +244,9 @@
     <MESSAGE value="docs: 배포" />
     <MESSAGE value="docs: CICD 수정" />
     <MESSAGE value="chore: 오탈자 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: 오탈자 수정" />
+    <MESSAGE value="feat: 에이전트 전략 대기열 구현" />
+    <MESSAGE value="chore" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
