@@ -2,8 +2,8 @@ name: Deploy Frontend to S3
 
 on:
   push:
-    branches: [ "main" ]   # main에 push될 때 배포
-  workflow_dispatch:        # 수동 실행 버튼도 추가
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -18,11 +18,14 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
+          cache-dependency-path: amore-app/package-lock.json
 
       - name: Install deps
+        working-directory: amore-app
         run: npm ci
 
       - name: Build
+        working-directory: amore-app
         run: npm run build
 
       - name: Configure AWS credentials
@@ -34,4 +37,4 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync dist s3://${{ secrets.S3_BUCKET }} --delete
+          aws s3 sync amore-app/dist s3://${{ secrets.S3_BUCKET }} --delete
