@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import PerformanceChart from "./PerformanceChart.jsx";
 import SummaryPanel from "./SummaryPanel.jsx";
-
+import Brand from "../ui/Brand.jsx";
 import graphIcon from "../../assets/icon/graph.svg";
 import calendarIcon from "../../assets/icon/calendar.svg";
 
@@ -11,12 +11,18 @@ const MAIN_TABS = [
     { key: "metric", label: "지표별" },
 ];
 
-const BRANDS = ["설화수", "이니스프리", "에뛰드", "에스트라", "비레디"];
+const BRANDS = [
+    "sulhwasoo",
+    "inisfree",
+    "etude",
+    "aestura",
+    "bready",
+];
 
 const METRICS = [
     { key: "open", label: "오픈율", color: "#12B981" },
     { key: "click", label: "클릭율", color: "#FF25C8" },
-    { key: "conv", label: "전환율", color: "#2773E6" },
+    { key: "conv", label: "전환율", color: "#1F5796" },
     { key: "roi", label: "ROI", color: "#001A4C" },
 ];
 
@@ -33,10 +39,10 @@ const DUMMY_SERIES = [
 export default function PerformanceSection() {
     const [tab, setTab] = useState("all");
 
-    // ✅ 브랜드별: 단일 선택
+    //  브랜드별: 단일 선택
     const [selectedBrand, setSelectedBrand] = useState("이니스프리");
 
-    // ✅ 지표별: 다중 선택(제한 없음)
+    //  지표별: 다중 선택(제한 없음)
     const [selectedMetrics, setSelectedMetrics] = useState(["open", "click"]);
 
     // 탭 바뀔 때 “자연스러운 기본값” 잡아주기
@@ -54,14 +60,14 @@ export default function PerformanceSection() {
         }
     };
 
-    // ✅ 실제 차트에 그릴 key들 결정
+    //  실제 차트에 그릴 key들 결정
     const visibleKeys = useMemo(() => {
         if (tab === "metric") return selectedMetrics; // 선택된 지표만
         // all/brand는 일단 3개 고정 (원하면 all에서 4개 다 보여도 됨)
         return ["open", "click", "conv"];
     }, [tab, selectedMetrics]);
 
-    // ✅ 더미데이터라도 “브랜드별” 느낌 내고 싶으면 여기에서 브랜드별로 데이터를 바꾸면 됨
+    // 더미데이터라도 “브랜드별” 느낌 내고 싶으면 여기에서 브랜드별로 데이터를 바꾸면 됨
     // 지금은 백엔드 없으니까 그대로 쓰되,
     // 나중에 brand별 dataMap 붙일 자리만 만들어둠.
     const chartData = useMemo(() => {
@@ -69,12 +75,13 @@ export default function PerformanceSection() {
 
         // 예시: 브랜드에 따라 값 살짝 다르게(더미)
         const factorMap = {
-            설화수: 1.05,
-            이니스프리: 1.0,
-            에뛰드: 0.95,
-            에스트라: 1.1,
-            비레디: 0.9,
+            sulhwasoo: 1.05,
+            inisfree: 1.0,
+            etude: 0.95,
+            aestura: 1.1,
+            bready: 0.9,
         };
+
         const f = factorMap[selectedBrand] ?? 1.0;
 
         return DUMMY_SERIES.map((d) => ({
@@ -86,7 +93,7 @@ export default function PerformanceSection() {
         }));
     }, [tab, selectedBrand]);
 
-    // ✅ 지표 토글
+    //  지표 토글
     const toggleMetric = (key) => {
         setSelectedMetrics((prev) => {
             if (prev.includes(key)) return prev.filter((k) => k !== key);
@@ -95,14 +102,14 @@ export default function PerformanceSection() {
     };
 
     return (
-        <div className="w-[1240px] h-[760px] rounded-[28px] border border-[#E2E2E2] bg-white p-8">
-            {/* ✅ 2컬럼 고정: 왼쪽(차트) / 오른쪽(캠페인요약) */}
+        <div className="w-[1240px] h-[760px] rounded-[28px] border border-[#EAEAEA] bg-white p-8">
+            {/*  2컬럼 고정: 왼쪽(차트) / 오른쪽(캠페인요약) */}
             <div className="grid grid-cols-[1fr_395px] gap-6 h-full">
                 {/* LEFT */}
                 <div className="relative">
-                    {/* ✅ 달력은 '왼쪽 컬럼' 우상단에 고정 */}
+                    {/*  달력은 '왼쪽 컬럼' 우상단에 고정 */}
                     <div className="absolute top-0 right-0">
-                        <div className="h-10 px-4 rounded-lg border border-[#E2E2E2] bg-white flex items-center gap-2 text-[14px] text-[#7A7A7A]">
+                        <div className="h-10 px-4 rounded-lg border border-[#E4E4E4] font-semibold bg-white flex items-center gap-2 text-[16px] text-[#8C8C8C]">
                             <img src={calendarIcon} alt="" className="w-4 h-4" />
                             2025 / 12 / 27 - 2025 / 12 / 27
                         </div>
@@ -112,7 +119,7 @@ export default function PerformanceSection() {
                     <div>
                         <div className="flex items-center gap-2">
                             <img src={graphIcon} alt="" className="w-5 h-5" />
-                            <h2 className="text-[20px] font-semibold">성과 분석 차트</h2>
+                            <h2 className="text-[20px] font-bold">성과 분석 차트</h2>
                         </div>
 
                         {/* 메인 탭 */}
@@ -123,10 +130,10 @@ export default function PerformanceSection() {
                                     type="button"
                                     onClick={() => handleChangeTab(t.key)}
                                     className={[
-                                        "h-10 px-4 rounded-lg border text-[14px] font-semibold",
+                                        "h-10 px-4 rounded-lg border text-[16px] font-semibold",
                                         tab === t.key
                                             ? "bg-[#001A4C] text-white border-[#001A4C]"
-                                            : "bg-white text-[#A1A0A0] border-[#E2E2E2]",
+                                            : "bg-white text-[#A8A8A8] border-[#E2E2E2]",
                                     ].join(" ")}
                                 >
                                     {t.label}
@@ -134,36 +141,19 @@ export default function PerformanceSection() {
                             ))}
                         </div>
 
-                        {/* ✅ 선택창 영역: all/brand/metric 모두 '같은 높이/같은 여백' 유지 */}
-                        <div className="mt-4 min-h-[44px] flex items-center">
+                        {/*  선택창 영역: all/brand/metric 모두 '같은 높이/같은 여백' 유지 */}
+                        <div className="mt-4 mb-8 min-h-[44px] flex items-center">
                             {tab === "brand" && (
                                 <div className="flex items-center gap-3">
-                                    {BRANDS.map((b) => {
-                                        const active = selectedBrand === b;
-                                        return (
-                                            <button
-                                                key={b}
-                                                type="button"
-                                                onClick={() => setSelectedBrand(b)}
-                                                className={[
-                                                    "h-10 px-5 rounded-full text-[14px] font-semibold transition",
-                                                    active
-                                                        ? (b === "설화수"
-                                                            ? "bg-[#FF8C03] text-white"
-                                                            : b === "이니스프리"
-                                                                ? "bg-[#12B981] text-white"
-                                                                : b === "에뛰드"
-                                                                    ? "bg-[#FF25C8] text-white"
-                                                                    : b === "에스트라"
-                                                                        ? "bg-[#2773E6] text-white"
-                                                                        : "bg-[#1F12EF] text-white")
-                                                        : "bg-[#E2E2E2] text-[#A1A0A0]",
-                                                ].join(" ")}
-                                            >
-                                                {b}
-                                            </button>
-                                        );
-                                    })}
+                                    {BRANDS.map((brand) => (
+                                        <Brand
+                                            key={brand}
+                                            brand={brand}
+                                            variant="select"
+                                            active={selectedBrand === brand}
+                                            onClick={() => setSelectedBrand(brand)}
+                                        />
+                                    ))}
                                 </div>
                             )}
 
@@ -177,8 +167,8 @@ export default function PerformanceSection() {
                                                 type="button"
                                                 onClick={() => toggleMetric(m.key)}
                                                 className={[
-                                                    "h-10 px-5 rounded-full text-[14px] font-semibold transition",
-                                                    active ? "text-white" : "bg-[#E2E2E2] text-[#A1A0A0]",
+                                                    "h-10 px-5 rounded-full text-[16px] font-semibold transition",
+                                                    active ? "text-white" : "bg-[#E2E2E2] text-[#A8A8A8]",
                                                 ].join(" ")}
                                                 style={active ? { backgroundColor: m.color } : undefined}
                                             >
@@ -189,7 +179,7 @@ export default function PerformanceSection() {
                                 </div>
                             )}
 
-                            {/* ✅ 전체요약도 brand/metric과 동일한 '선택창 자리'만 유지 */}
+                            {/* 전체요약도 brand/metric과 동일한 '선택창 자리'만 유지 */}
                             {tab === "all" && <div className="h-10" />}
                         </div>
                     </div>

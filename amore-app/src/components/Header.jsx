@@ -22,8 +22,8 @@ export default function Header() {
     };
 
     return (
-        <header  className="fixed top-0 left-0 right-0 z-50 h-[72px] bg-[#001A4C]">
-            <div className="h-full flex items-center justify-between container-300">
+        <header className="fixed top-0 left-0 right-0 z-50 h-[72px] bg-[#001A4C]">
+            <div className="h-full flex items-center justify-between px-[50px]">
                 <button
                     type="button"
                     onClick={handleLogoClick}

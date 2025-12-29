@@ -5,7 +5,7 @@ export default function AppLayout() {
   return (
     <>
       <Header />
-      <main className="pt-[72px]">
+      <main className="pt-[72px]"> {/*헤더만큼 띄우기*/}
         <Outlet />
       </main>
     </>

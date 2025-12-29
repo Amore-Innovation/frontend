@@ -12,7 +12,7 @@ import ChartTooltip from "./CustomToolTip.jsx";
 const COLORS = {
     open: "#12B981",
     click: "#FF25C8",
-    conv: "#2773E6",
+    conv: "#1F5796",
     roi: "#001A4C",
 };
 
@@ -28,12 +28,12 @@ export default function PerformanceChart({ data, visibleKeys }) {
                 {visibleKeys.map((key) => (
                     <Line
                         key={key}
-                        type="monotone"
+                        type="linear"
                         dataKey={key}
                         stroke={COLORS[key]}
-                        strokeWidth={3}
+                        strokeWidth={4}
                         dot={{ r: 4 }}
-                        activeDot={{ r: 6 }}
+                        activeDot={{ r: 4 }}
                     />
                 ))}
             </LineChart>

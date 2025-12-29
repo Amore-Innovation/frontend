@@ -4,31 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="feat: 헤더구현">
-      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/Sunny.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/activate.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/ai.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/calendar.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/graph.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/graph_w.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/log.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/newcustom.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/timeline.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/components/charts/CustomToolTip.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceChart.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceSection.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/components/charts/SummaryPanel.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/pages/AgentStatusPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/pages/AutoOpsLogPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/pages/PerformanceChartsPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/pages/StrategyQueuePage.jsx" afterDir="false" />
+    <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="feat: 에이전트 자동 운영 로그 구현">
+      <change afterPath="$PROJECT_DIR$/amore-app/src/components/ui/Brand.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/amore-app/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/CustomToolTip.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/CustomToolTip.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceChart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceChart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/SummaryPanel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/SummaryPanel.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/amore-app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/layout/AppLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/layout/AppLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/pages/AgentStatusPage.jsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/amore-app/src/pages/AmorePartyPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/pages/AmorePartyPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/pages/PerformanceChartsPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/pages/StrategyQueuePage.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +54,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -73,6 +63,8 @@
       <recent name="$PROJECT_DIR$/amore-app/src/assets/agents" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/amore-app/src/components" />
+      <recent name="$PROJECT_DIR$/amore-app/src" />
       <recent name="$PROJECT_DIR$/amore-app/src/assets/icon" />
       <recent name="$PROJECT_DIR$/amore-app/src/assets/agents" />
       <recent name="$PROJECT_DIR$/amore-app/src/assets/charts" />
@@ -105,7 +97,7 @@
       <workItem from="1766501057419" duration="1336000" />
       <workItem from="1766506178589" duration="216000" />
       <workItem from="1766682974625" duration="1428000" />
-      <workItem from="1766936872031" duration="9302000" />
+      <workItem from="1766936872031" duration="21813000" />
     </task>
     <task id="LOCAL-00001" summary="초기 세팅">
       <option name="closed" value="true" />
@@ -131,7 +123,31 @@
       <option name="project" value="LOCAL" />
       <updated>1766940619091</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: 성과 분석 차트 구현">
+      <option name="closed" value="true" />
+      <created>1766948991574</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1766948991574</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: 에이전트 상태 요약 구현">
+      <option name="closed" value="true" />
+      <created>1766981941944</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1766981941944</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: 에이전트 자동 운영 로그 구현">
+      <option name="closed" value="true" />
+      <created>1766981952289</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1766981952289</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +164,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/dev" />
+                        <option value="dev" />
                       </list>
                     </value>
                   </entry>
@@ -163,7 +179,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="초기 세팅" />
     <MESSAGE value="feat: 헤더구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 헤더구현" />
+    <MESSAGE value="feat: 성과 분석 차트 구현" />
+    <MESSAGE value="feat: 에이전트 상태 요약 구현" />
+    <MESSAGE value="feat: 에이전트 자동 운영 로그 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 에이전트 자동 운영 로그 구현" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
