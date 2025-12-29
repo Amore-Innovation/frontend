@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PerformanceSection from "../components/charts/PerformanceSection.jsx";
 import AgentStatusSection from "../components/agent/AgentStatusSection.jsx";
+import AgentQueueSection from "../components/agent/AgentQueueSection.jsx";
 import AgentAutoLogSection from "../components/agent/AgentAutoLogSection.jsx";
 
 export default function AmorePartyPage() {
@@ -100,8 +101,7 @@ export default function AmorePartyPage() {
 
                     <div className={CONTENT_WRAP}>
                         <section id="section-queue" className="scroll-mt-[92px]">
-                            <h1 className="text-2xl font-semibold">에이전트 전략 대기열</h1>
-                            <div className="mt-4 h-[600px] rounded-xl border bg-white" />
+                            <AgentQueueSection />
                         </section>
                     </div>
 

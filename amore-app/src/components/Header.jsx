@@ -4,8 +4,8 @@ import headerIcon from "../assets/icon/header.svg";
 const tabs = [
     { label: "성과 분석 차트", to: "/charts" },
     { label: "에이전트 상태 요약", to: "/agents" },
-    { label: "에이전트 전략 대기열", to: "/logs" },
-    { label: "에이전트 자동 운영 로그    ", to: "/queue" },
+    { label: "에이전트 전략 대기열", to: "/queue" },
+    { label: "에이전트 자동 운영 로그    ", to: "/logs" },
 ];
 
 export default function Header() {
