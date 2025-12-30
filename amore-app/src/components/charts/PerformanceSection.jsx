@@ -1,7 +1,8 @@
+// PerformanceSection.jsx
 import { useMemo, useState } from "react";
 import PerformanceChart from "./PerformanceChart.jsx";
 import SummaryPanel from "./SummaryPanel.jsx";
-import Brand from "../ui/Brand.jsx";
+import Brand, { LABEL } from "../ui/Brand.jsx"; // ✅ named import
 import graphIcon from "../../assets/icon/graph.svg";
 import calendarIcon from "../../assets/icon/calendar.svg";
 
@@ -11,13 +12,7 @@ const MAIN_TABS = [
     { key: "metric", label: "지표별" },
 ];
 
-const BRANDS = [
-    "sulhwasoo",
-    "inisfree",
-    "etude",
-    "aestura",
-    "bready",
-];
+const BRANDS = ["sulhwasoo", "inisfree", "etude", "aestura", "bready"];
 
 const METRICS = [
     { key: "open", label: "오픈율", color: "#12B981" },
@@ -26,7 +21,13 @@ const METRICS = [
     { key: "roi", label: "ROI", color: "#001A4C" },
 ];
 
-// 더미 데이터: 일단 all 기준으로 4개 지표 다 넣어둠 (roi도 추가)
+const METRIC_LABEL = {
+    open: "오픈율",
+    click: "클릭율",
+    conv: "전환율",
+    roi: "ROI",
+};
+
 const DUMMY_SERIES = [
     { date: "Dec 21", open: 80, click: 45, conv: 20, roi: 30 },
     { date: "Dec 22", open: 95, click: 55, conv: 35, roi: 40 },
@@ -37,43 +38,37 @@ const DUMMY_SERIES = [
 ];
 
 export default function PerformanceSection() {
+     const tabBtnBase =
+        "h-10 px-4 rounded-lg border text-[16px] font-semibold transition-all duration-150 " +
+        "hover:-translate-y-[1px] hover:shadow-sm active:translate-y-0"
+
+    const tabBtnActive = "bg-[#001A4C] text-white border-[#001A4C]";
+    const tabBtnInactive =
+    "bg-white text-[#A8A8A8] border-[#E2E2E2] hover:text-[#6F6F6F] hover:border-[#CFCFCF]";
+
     const [tab, setTab] = useState("all");
 
-    //  브랜드별: 단일 선택
-    const [selectedBrand, setSelectedBrand] = useState("이니스프리");
+    // ✅ 브랜드 key로 통일
+    const [selectedBrand, setSelectedBrand] = useState("inisfree");
 
-    //  지표별: 다중 선택(제한 없음)
     const [selectedMetrics, setSelectedMetrics] = useState(["open", "click"]);
 
-    // 탭 바뀔 때 “자연스러운 기본값” 잡아주기
     const handleChangeTab = (next) => {
         setTab(next);
 
-        if (next === "brand") {
-            // 브랜드 탭 들어오면 기본 1개 선택 유지
-            // (원하면 여기서 강제로 "이니스프리"로 리셋 가능)
-            return;
-        }
         if (next === "metric") {
-            // 지표 탭 들어오면 기본 2개 정도 켜두기
             if (selectedMetrics.length === 0) setSelectedMetrics(["open", "click"]);
         }
     };
 
-    //  실제 차트에 그릴 key들 결정
     const visibleKeys = useMemo(() => {
-        if (tab === "metric") return selectedMetrics; // 선택된 지표만
-        // all/brand는 일단 3개 고정 (원하면 all에서 4개 다 보여도 됨)
+        if (tab === "metric") return selectedMetrics;
         return ["open", "click", "conv"];
     }, [tab, selectedMetrics]);
 
-    // 더미데이터라도 “브랜드별” 느낌 내고 싶으면 여기에서 브랜드별로 데이터를 바꾸면 됨
-    // 지금은 백엔드 없으니까 그대로 쓰되,
-    // 나중에 brand별 dataMap 붙일 자리만 만들어둠.
     const chartData = useMemo(() => {
         if (tab !== "brand") return DUMMY_SERIES;
 
-        // 예시: 브랜드에 따라 값 살짝 다르게(더미)
         const factorMap = {
             sulhwasoo: 1.05,
             inisfree: 1.0,
@@ -93,7 +88,6 @@ export default function PerformanceSection() {
         }));
     }, [tab, selectedBrand]);
 
-    //  지표 토글
     const toggleMetric = (key) => {
         setSelectedMetrics((prev) => {
             if (prev.includes(key)) return prev.filter((k) => k !== key);
@@ -101,28 +95,52 @@ export default function PerformanceSection() {
         });
     };
 
+    // ✅ AI 요약 멘트: 탭/선택값 따라 변경
+    const aiSummary = useMemo(() => {
+        if (tab === "all") {
+            return "오픈율과 클릭율이 동반 상승해 메시지 반응도가 전반적으로 개선됐습니다. 전환율도 안정적으로 유지되어 구매로 이어질 가능성이 높아지는 흐름입니다.";
+        }
+
+        if (tab === "brand") {
+            const brandName = LABEL[selectedBrand] ?? selectedBrand;
+            return `${brandName} 캠페인은 오픈/클릭 지표가 안정적으로 상승 중입니다. 전환율이 유지되는 구간에서 도달·반응 효율이 개선되고 있어, 다음 액션으로 발송 타이밍/예산 최적화를 권장합니다.`;
+        }
+
+        // metric
+        if (!selectedMetrics || selectedMetrics.length === 0) {
+            return "선택된 지표가 없습니다. 확인할 지표(오픈율/클릭율/전환율/ROI)를 선택해 주세요.";
+        }
+
+        const labels = selectedMetrics.map((k) => METRIC_LABEL[k] ?? k).join(", ");
+        return `현재 ${labels} 중심으로 추이를 분석 중입니다. 지표를 함께 비교하면 ‘반응(오픈/클릭) → 구매(전환) → 효율(ROI)’ 흐름을 더 정확히 파악할 수 있습니다.`;
+    }, [tab, selectedBrand, selectedMetrics]);
+
     return (
         <div className="w-[1240px] h-[760px] rounded-[28px] border border-[#EAEAEA] bg-white p-8">
-            {/*  2컬럼 고정: 왼쪽(차트) / 오른쪽(캠페인요약) */}
             <div className="grid grid-cols-[1fr_395px] gap-6 h-full">
-                {/* LEFT */}
                 <div className="relative">
-                    {/*  달력은 '왼쪽 컬럼' 우상단에 고정 */}
                     <div className="absolute top-0 right-0">
-                        <div className="h-10 px-4 rounded-lg border border-[#E4E4E4] font-semibold bg-white flex items-center gap-2 text-[16px] text-[#8C8C8C]">
+                        <button
+                        type="button"
+                       className={[
+                                     "h-10 px-4 rounded-lg border border-[#E4E4E4] font-semibold bg-white flex items-center gap-2",
+                                     "text-[16px] text-[#8C8C8C]",
+                                     "transition-all duration-150 cursor-pointer",
+                                     "hover:border-[#CFCFCF] hover:text-[#6F6F6F] hover:shadow-sm hover:-translate-y-[1px]",
+                                     "active:translate-y-0",
+                                   ].join(" ")}
+                                 >
                             <img src={calendarIcon} alt="" className="w-4 h-4" />
                             2025 / 12 / 27 - 2025 / 12 / 27
-                        </div>
+                        </button>
                     </div>
 
-                    {/* 타이틀 + 탭 */}
                     <div>
                         <div className="flex items-center gap-2">
                             <img src={graphIcon} alt="" className="w-5 h-5" />
                             <h2 className="text-[20px] font-bold">성과 분석 차트</h2>
                         </div>
 
-                        {/* 메인 탭 */}
                         <div className="mt-3 flex items-center gap-2">
                             {MAIN_TABS.map((t) => (
                                 <button
@@ -130,10 +148,8 @@ export default function PerformanceSection() {
                                     type="button"
                                     onClick={() => handleChangeTab(t.key)}
                                     className={[
-                                        "h-10 px-4 rounded-lg border text-[16px] font-semibold",
-                                        tab === t.key
-                                            ? "bg-[#001A4C] text-white border-[#001A4C]"
-                                            : "bg-white text-[#A8A8A8] border-[#E2E2E2]",
+                                        tabBtnBase,
+                                        tab === t.key ? tabBtnActive : tabBtnInactive,
                                     ].join(" ")}
                                 >
                                     {t.label}
@@ -141,7 +157,6 @@ export default function PerformanceSection() {
                             ))}
                         </div>
 
-                        {/*  선택창 영역: all/brand/metric 모두 '같은 높이/같은 여백' 유지 */}
                         <div className="mt-4 mb-8 min-h-[44px] flex items-center">
                             {tab === "brand" && (
                                 <div className="flex items-center gap-3">
@@ -167,8 +182,11 @@ export default function PerformanceSection() {
                                                 type="button"
                                                 onClick={() => toggleMetric(m.key)}
                                                 className={[
-                                                    "h-10 px-5 rounded-full text-[16px] font-semibold transition",
-                                                    active ? "text-white" : "bg-[#E2E2E2] text-[#A8A8A8]",
+                                                    "h-10 px-5 rounded-full text-[16px] font-semibold transition-all duration-150",
+                                                    "cursor-pointer hover:-translate-y-[1px] hover:shadow-sm active:translate-y-0",
+                                                    active
+                                                        ? "text-white"
+                                                        : "bg-[#E2E2E2] text-[#A8A8A8] hover:bg-[#D7D7D7] hover:text-[#7A7A7A]",
                                                 ].join(" ")}
                                                 style={active ? { backgroundColor: m.color } : undefined}
                                             >
@@ -179,20 +197,18 @@ export default function PerformanceSection() {
                                 </div>
                             )}
 
-                            {/* 전체요약도 brand/metric과 동일한 '선택창 자리'만 유지 */}
                             {tab === "all" && <div className="h-10" />}
                         </div>
                     </div>
 
-                    {/* 차트 */}
                     <div className="mt-6 w-[760px] h-[520px]">
                         <PerformanceChart data={chartData} visibleKeys={visibleKeys} />
                     </div>
                 </div>
 
-                {/* RIGHT */}
-                <div className="h-[710px] self-start">
-                    <SummaryPanel />
+                <div className="h-[710px] self-start overflow-hidden">
+                    {/* ✅ aiSummary 전달 */}
+                    <SummaryPanel aiSummary={aiSummary} />
                 </div>
             </div>
         </div>

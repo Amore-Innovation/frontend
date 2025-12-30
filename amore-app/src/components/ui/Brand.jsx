@@ -1,5 +1,5 @@
     // BrandPill.jsx
-    const BRAND_COLOR = {
+    export const BRAND_COLOR = {
         inisfree: "#12B981",
         aestura: "#2773E6",
         etude: "#FF25C8",
@@ -7,7 +7,7 @@
         bready: "#1E12FF",
     };
 
-    const LABEL = {
+    export const LABEL = {
         inisfree: "이니스프리",
         aestura: "에스트라",
         etude: "에뛰드",
@@ -62,6 +62,8 @@
             "h-[40px]",
             active ? "text-white" : "bg-[#E2E2E2] text-[#A8A8A8]",
             isClickable ? "cursor-pointer" : "cursor-not-allowed",
+            isClickable && !active ? "hover:bg-[#D7D7D7] hover:text-[#7A7A7A]" : "",
+            isClickable ? "transition-all duration-150 hover:-translate-y-[1px] hover:shadow-sm active:translate-y-0" : "",
             className,
         ].join(" ");
 

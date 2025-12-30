@@ -37,6 +37,14 @@ export default function AgentQueueSection() {
     const [nowMin, setNowMin] = useState(() => getNowMinutesKST());
     const [nowText, setNowText] = useState(() => nowLabelKST());
 
+    //공통hover
+     const filterBtnCls =
+           "h-[44px] px-5 rounded-[10px] border bg-white text-[16px] font-semibold " +
+           "text-[#8C8C8C] flex items-center gap-2 " +
+           "cursor-pointer transition-all duration-150 " +
+           "hover:-translate-y-[1px] hover:border-[#CFCFCF] hover:bg-[#FAFAFA] hover:shadow-sm " +
+           "active:translate-y-0";
+
     useEffect(() => {
         const id = setInterval(() => {
             setNowMin(getNowMinutesKST());
@@ -63,6 +71,22 @@ export default function AgentQueueSection() {
         el.scrollLeft = Math.max(0, nowX - 420);
     }, [nowX]);
 
+    useEffect(() => {
+           const el = scrollerRef.current;
+           if (!el) return;
+
+               const clamp = () => {
+                 const max = Math.max(0, el.scrollWidth - el.clientWidth);
+                 if (el.scrollLeft < 0) el.scrollLeft = 0;
+                 if (el.scrollLeft > max) el.scrollLeft = max;
+               };
+
+               el.addEventListener("scroll", clamp, { passive: true });
+           // 초기 1회도 clamp
+               clamp();
+           return () => el.removeEventListener("scroll", clamp);
+         }, []);
+
     const hourMarks = useMemo(() => {
         const arr = [];
         for (let h = 0; h <= 24; h += 3) arr.push(h * 60);
@@ -87,7 +111,7 @@ export default function AgentQueueSection() {
                 <div className="flex items-center gap-3">
                     <button
                         type="button"
-                        className="h-[44px] px-5 rounded-[10px] border border-[#E4E4E4] bg-white text-[16px] font-semibold text-[#8C8C8C] flex items-center gap-2"
+                        className={[filterBtnCls, "border-[#E4E4E4]"].join(" ")}
                     >
                         브랜드
                         <img src={underArrow} alt="" className="w-4 h-4 opacity-80" />
@@ -95,24 +119,30 @@ export default function AgentQueueSection() {
 
                     <button
                         type="button"
-                        className="h-[44px] px-5 rounded-[10px] border border-[#E4E4E4] bg-white text-[16px] font-semibold text-[#8C8C8C] flex items-center gap-2"
+                        className={[filterBtnCls, "border-[#E4E4E4]"].join(" ")}
                     >
                         조정
                         <img src={underArrow} alt="" className="w-4 h-4 opacity-80" />
                     </button>
 
-                    <div className="h-[44px] px-5 rounded-[10px] border border-[#E2E2E2] bg-white flex items-center gap-2">
+                    <div
+                    className={[
+                       "h-[44px] px-5 rounded-[10px] border border-[#E2E2E2] bg-white flex items-center gap-2",
+                       "cursor-pointer transition-all duration-150",
+                       "hover:-translate-y-[1px] hover:border-[#CFCFCF] hover:bg-[#FAFAFA] hover:shadow-sm",
+                       "active:translate-y-0",
+                        ].join(" ")}
+                    >
                         <img src={calendarIcon} alt="" className="w-5 h-5" />
                         <span className="text-[16px] font-semibold text-[#8C8C8C]">2025 / 12 / 27</span>
                     </div>
                 </div>
             </div>
 
-            {/* 스크롤 컨테이너 */}
             <div className="mt-6 rounded-[12px] overflow-hidden border border-[#EDEDED]">
                 <div
                     ref={scrollerRef}
-                    className="relative overflow-x-auto overflow-y-auto bg-white"
+                    className="relative overflow-x-auto overflow-y-auto bg-white overscroll-x-none"
                     style={{ height: 44 + VIEW_H }}
                 >
                     <div
@@ -161,7 +191,7 @@ export default function AgentQueueSection() {
                                 {slotMarks.map((m) => (
                                     <div
                                         key={`grid-45m-${m}`}
-                                        className="absolute top-0 h-full border-l border-dashed border-[#F0F0F0]"
+                                        className="absolute top-0 h-full border-l border-dashed border-[#F0F0F0] "
                                         style={{ left: m * PX_PER_MIN }}
                                     />
                                 ))}
@@ -184,13 +214,13 @@ export default function AgentQueueSection() {
 
                             {/* ✅ 카드: 점선보다 위 */}
 
-                            <div className="absolute inset-0 z-10">
+                            <div className="absolute inset-0 z-10   ">
                                 {placedItems.map((item) => {
                                     const left = item.startMin * PX_PER_MIN;
                                     const top = item.row * ROW_H + CARD_TOP_OFFSET;   // ✅ 변경
 
                                     return (
-                                        <div key={item.id} className="absolute" style={{ left, top }}>
+                                        <div key={item.id} className="absolute cursor-pointer" style={{ left, top }}>
                                             <QueueCard item={item} />
                                         </div>
                                     );

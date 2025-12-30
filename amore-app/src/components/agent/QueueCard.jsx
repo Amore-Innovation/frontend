@@ -4,7 +4,14 @@ import Brand from "../ui/Brand.jsx";
 
 export default function QueueCard({ item }) {
     return (
-        <div className="w-[360px] rounded-[12px] bg-[#F7F7F7] px-5 py-4">
+        <div
+     className={[
+                       "w-[360px] rounded-[12px] bg-[#F7F7F7] px-5 py-4",
+               "transition-all duration-150 will-change-transform",
+               "hover:-translate-y-[2px] hover:shadow-[0_8px_18px_rgba(0,0,0,0.12)]",
+               "active:-translate-y-[1px]",
+             ].join(" ")}
+       >
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <img src={activeIcon} alt="" className="w-7 h-7" />

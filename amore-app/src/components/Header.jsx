@@ -22,7 +22,7 @@ export default function Header() {
                 <button
                     type="button"
                     onClick={handleLogoClick}
-                    className="flex items-center"
+                    className="flex items-center cursor-pointer hover:opacity-90 active:opacity-80"
                     aria-label="Go to top"
                 >
                     <img
@@ -43,10 +43,10 @@ export default function Header() {
                                 [
                                     "relative inline-flex items-center h-[72px]",
                                     "text-[16px] font-semibold",
-                                    isActive ? "text-[#A1A0A0]" : "text-white",
+                                    isActive ? "text-[#A1A0A0]" : "text-white hover:text-[#D0D0D0]",
                                     isActive
                                         ? "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[4px] after:w-full after:bg-[#A1A0A0]"
-                                        : "",
+                                        : "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#D0D0D0] hover:after:w-full after:transition-all after:duration-200",
                                 ].join(" ")
                             }
                         >
