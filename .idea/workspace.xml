@@ -4,10 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="chore">
+    <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="fix: 헤더 및 스크롤링 오류해결">
+      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/agentAutoLogs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/agentStatusCards.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/brandMeta.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/amore-app/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/pages/AmorePartyPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/pages/AmorePartyPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/agent/AgentAutoLogSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/agent/AgentAutoLogSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/agent/AgentQueueSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/agent/AgentQueueSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/agent/AgentStatusSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/agent/AgentStatusSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/agent/QueueCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/agent/QueueCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/SummaryPanel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/SummaryPanel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/ui/Brand.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/ui/Brand.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/agentQueueItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/mocks/agentQueueItems.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,18 +32,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "emfpdlzj"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;emfpdlzj&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Amore-Innovation/frontend.git",
-    "accountId": "1076ef4a-5518-4f6a-ad10-346c8241e802"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Amore-Innovation/frontend.git&quot;,
+    &quot;accountId&quot;: &quot;1076ef4a-5518-4f6a-ad10-346c8241e802&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -100,7 +110,8 @@
       <workItem from="1766506178589" duration="216000" />
       <workItem from="1766682974625" duration="1428000" />
       <workItem from="1766936872031" duration="21813000" />
-      <workItem from="1766990860917" duration="4098000" />
+      <workItem from="1766990860917" duration="8441000" />
+      <workItem from="1767032136903" duration="9859000" />
     </task>
     <task id="LOCAL-00001" summary="초기 세팅">
       <option name="closed" value="true" />
@@ -206,7 +217,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766994628867</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="fix: 헤더 및 스크롤링 오류해결">
+      <option name="closed" value="true" />
+      <created>1766995048808</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1766995048808</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix: 헤더 및 스크롤링 오류해결">
+      <option name="closed" value="true" />
+      <created>1766995055793</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1766995055793</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +273,8 @@
     <MESSAGE value="chore: 오탈자 수정" />
     <MESSAGE value="feat: 에이전트 전략 대기열 구현" />
     <MESSAGE value="chore" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore" />
+    <MESSAGE value="fix: 헤더 및 스크롤링 오류해결" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 헤더 및 스크롤링 오류해결" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
