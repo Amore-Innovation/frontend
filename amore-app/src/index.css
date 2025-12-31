@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "pretendard/dist/web/variable/pretendardvariable.css";
 
-/* 전역 기본값만 최소로 */
+/*전역 기본값*/
 :root {
     font-family: Pretendard Variable, Pretendard, system-ui, -apple-system, "Segoe UI",
     Roboto, "Noto Sans KR", Arial, sans-serif;

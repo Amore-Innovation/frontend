@@ -1,5 +1,6 @@
 // AgentStatusSection.jsx
 import { useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import aiIcon from "../../assets/icon/ai.svg";
 import navigatePrev from "../../assets/icon/NavigatePrevious.svg";
 import navigateNext from "../../assets/icon/NavigateNext.svg";
@@ -44,6 +45,8 @@ function Status({ children, tone = "pink" }) {
 function AgentCard({ card }) {
     // ✅ "긴급 중단" 카드도 클릭/hover 가능해야 하므로, disabled는 "진짜 비활성"이 아니라 "스타일"만 의미
     const isDisabledTheme = card.theme === "disabled";
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const cardCls = [
         "rounded",
@@ -74,6 +77,12 @@ function AgentCard({ card }) {
             : card.theme === "disabled"
                 ? "bg-[#7D7D7D]"
                 : "bg-[#001A4C]";
+
+    const openDetail = () => {
+        navigate(`/agents/campaign/${card.id}`, {
+            state: { backgroundLocation: location },
+        });
+    };
 
     return (
         <div className={cardCls}>
@@ -139,6 +148,7 @@ function AgentCard({ card }) {
                     <button
                         type="button"
                         // ✅ 긴급중단(회색)도 클릭/hover 가능해야 하므로 disabled 제거
+                        onClick={openDetail} //팝업열기
                         className={[
                             "h-[40px] w-[140px] rounded-sm",
                             "text-[18px] font-semibold",

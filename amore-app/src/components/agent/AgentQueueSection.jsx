@@ -154,7 +154,7 @@ export default function AgentQueueSection() {
                             {hourMarks.map((m) => (
                                 <div
                                     key={m}
-                                    className="absolute top-0 h-full flex items-center justify-center text-white text-[16px] font-semibold"
+                                    className="absolute top-0 h-full flex items-center justify-center text-white text-[16px] font-m3dium"
                                     style={{
                                         left: m * PX_PER_MIN,
                                         width: 3 * 60 * PX_PER_MIN,

@@ -8,7 +8,6 @@ export default function SummaryPanel({ aiSummary }) {
      className={[
          "h-full w-full rounded-2xl bg-[#001A4C] p-6 text-white",
          "transition-transform duration-200 will-change-transform",
-         "hover:scale-[1.01]",
              ].join(" ")}
        >
             <div className="flex items-center gap-2">
