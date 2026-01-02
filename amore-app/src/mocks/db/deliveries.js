@@ -1,76 +1,124 @@
-const sampleProducts = [
-    { name: "[더블] 그린티 히알루론산 수분 선세럼 50ml SPF50/PA++++", spec: "EX 50ml SPF50/PA++++", price: 20000, discount: 60 },
-    { name: "[더블] 비타C 잡티 케어 세럼 50ml SPF50/PA++++", spec: "30ml", price: 18000, discount: 50 },
-    { name: "[더블] 시카 진정 크림 50ml SPF50/PA++++", spec: "50ml", price: 22000, discount: 40 },
-    { name: "[더블] 히알루론산 토너 50ml SPF50/PA++++", spec: "200ml", price: 15000, discount: 45 },
-];
+// src/mocks/db/deliveries.js
+import { campaigns } from "./campaigns.js";
+import { users } from "./users.js";
+import { messageTemplates } from "./messageTemplates.js";
+import { products } from "./products.js";
 
-const sampleMessages = [
-    {
-        title: "[ 익숙한 루틴을 이어가기 좋은 시점이에요 ]",
-        body:
-            "[이름]님이 사용해오신 제품을 다시 추천드려요.\n" +
-            "매일 사용하는 기초 제품은 루틴을 끊김 없이 이어가는 것이 중요해요." +
-            "이전과 같은 사용감으로 피부 컨디션을 안정적으로 관리하실 수 있어요.\n" +
-            "지금 사용하기 좋은 타이밍에 준비해보세요.",
-        cta: "👉 동일 제품 다시 보기",
-    },
-    {
-        title: "[ 지금이 가장 효과를 보기 좋아요 ]",
-        body:
-            "최근 관심 제품과 비슷한 라인으로 맞춤 추천을 준비했어요." +
-            "빛나는 피부를 위해 한 번 구매해보시는거 어떨까요?\n" +
-            "오늘만 추가 혜택이 적용돼요.",
-        cta: "👉 동일 제품 다시 보기",
-    },
-];
+// ✅ 새로고침해도 결과 고정 hash
+function hash01(str) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+    }
+    return (h >>> 0) / 4294967295;
+}
 
-function makeISO(daysAgo, hour, minute) {
-    // 기준일을 임의로 2025-02-25로 잡고 “daysAgo”만큼 과거로 생성
-    const base = new Date("2025-02-25T00:00:00+09:00");
+// ✅ "1~2개만 2026" 섞기용: newestOnly=true면 2026-01-02 기준,
+// 아니면 기존 2025-12-27 기준
+function makeISO(daysAgo, hour, minute, newestOnly = false) {
+    const base = newestOnly
+        ? new Date("2026-01-02T00:00:00+09:00") // ✅ 2026 기준
+        : new Date("2025-12-27T00:00:00+09:00"); // ✅ 2025 기준
+
     base.setDate(base.getDate() - daysAgo);
     base.setHours(hour, minute, 0, 0);
     return base.toISOString();
 }
 
+const personaBehavior = {
+    p1: { openRate: 0.80, purchaseRate: 0.70 },
+    p2: { openRate: 0.65, purchaseRate: 0.95 },
+    p3: { openRate: 0.65, purchaseRate: 0.40 },
+    p4: { openRate: 0.70, purchaseRate: 0.70 },
+    p5: { openRate: 0.70, purchaseRate: 0.50 },
+};
+
+function pickTemplate({ personaId, triggerType }) {
+    const candidates = messageTemplates.filter(
+        (t) => t.personaId === personaId && t.triggerType === triggerType
+    );
+    return candidates[0] || null; // ✅ 각 트리거당 1개만 남길 거라 0번이면 충분
+}
+
+function findProduct(productId) {
+    return products.find((p) => p.id === productId) || null;
+}
+
 export const deliveries = (() => {
     const arr = [];
 
-    const campaignIds = ["c1", "c2", "c3", "c4", "c5", "c6"];
+    // ✅ 항상 고정으로 u1001~u1005만 "데이터 있는 행"이 되게
+    const topUsers = users.slice(0, 5);
 
-    for (let u = 1; u <= 30; u++) {
-        const userId = `u${u}`;
+    for (let ui = 0; ui < topUsers.length; ui++) {
+        const user = topUsers[ui];
+        const userId = user.id;
+        const personaId = user.personaId; // ✅ 유저의 페르소나
 
-        // 유저마다 6개 캠페인 중 일부에 delivery 생성 + “유저 히스토리”용으로 추가 히스토리 더 붙임
-        for (let k = 0; k < 10; k++) {
-            const campaignId = campaignIds[(u + k) % campaignIds.length];
-            const product = sampleProducts[(u + k) % sampleProducts.length];
-            const msg = sampleMessages[(u + k) % sampleMessages.length];
+        for (let ci = 0; ci < campaigns.length; ci++) {
+            const c = campaigns[ci];
 
-            const opened = (u + k) % 3 === 0;
-            const purchased = (u + k) % 5 === 0;
+            const campaignId = c.id;
+            const triggerType = c.triggerType; // ✅ 캠페인의 트리거로 "그 캠페인에서 보낸 메시지"를 구성
+
+            const template = pickTemplate({ personaId, triggerType });
+            if (!template) continue; // 해당 persona에 그 트리거 템플릿이 없으면 스킵
+
+            const prod = findProduct(template.productId);
+
+            const seedKey = `${userId}::${campaignId}::${triggerType}`;
+
+            const behavior =
+                personaBehavior[personaId] || { openRate: 0.5, purchaseRate: 0.2 };
+            const r1 = hash01(seedKey + "::opened");
+            const r2 = hash01(seedKey + "::purchased");
+
+            const opened = r1 < behavior.openRate;
+            const purchased = opened && r2 < behavior.purchaseRate;
+
+            // ✅ 유저당 1개만 2026으로(가장 최신 ci=0)
+            //    나머지는 2025 기준 유지
+            const is2026 = ci === 0; // ✅ 여기만 바꾸면 "몇 개 2026" 조절 가능
+            const sentAt = makeISO(
+                ci, // daysAgo로 계속 쓰고 싶으면 유지
+                9 + (ci % 3),
+                10 + (ci * 7) % 50,
+                is2026
+            );
 
             arr.push({
-                id: `d_${userId}_${campaignId}_${k}`,
+                id: `d_${userId}_${campaignId}`, // ✅ (user,campaign) 단일키
+
                 campaignId,
                 userId,
-                sentAt: makeISO(k, 9, 30), // k가 커질수록 과거 (0이 최신)
+                sentAt,
                 opened,
                 purchased,
+
+                personaId,
+                templateId: template.id,
+                triggerType: template.triggerType,
+                triggerName: template.triggerName,
+                highlightTag: template.highlightTag,
+                reviewId: template.reviewId,
+
                 product: {
-                    name: product.name,
-                    spec: product.spec,
-                    price: product.price,
-                    discount: product.discount,
+                    id: prod?.id ?? template.productId,
+                    name: prod?.name ?? "(상품명 없음)",
+                    spec: prod?.spec ?? "",
+                    price: prod?.currentPrice ?? null,
+                    discount: prod?.discountRate ?? null,
                 },
+
                 message: {
-                    title: msg.title,
-                    body: msg.body,
-                    cta: msg.cta,
+                    title: template.messageTitle,
+                    body: template.messageBody,
+                    cta: template.buttonText || "자세히 보기",
                 },
             });
         }
     }
 
-    return arr;
+    return arr.sort((a, b) => new Date(b.sentAt) - new Date(a.sentAt));
 })();

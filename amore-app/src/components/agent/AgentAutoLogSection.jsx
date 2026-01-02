@@ -147,13 +147,13 @@ export default function AgentAutoLogSection() {
                     </button>
 
                     <button type="button" className={filterBtnCls}>
-                        조정
+                        필터
                         <img src={arrowDown} alt="" className="w-[18px] h-[18px] opacity-70" />
                     </button>
 
                     <button type="button" className={filterBtnCls}>
                         <img src={calendar} alt="" className="w-[18px] h-[18px] opacity-70" />
-                        2025 / 12 / 27 - 2025 / 12 / 27
+                        2026 / 01 / 01 - 2026 / 01 / 02
                     </button>
                 </div>
             </div>

@@ -3,32 +3,34 @@ import { useMemo, useRef, useEffect, useState } from "react";
 
 import calendarIcon from "../../assets/icon/calendar.svg";
 import clockIcon from "../../assets/icon/clock.svg";
-import timelineIcon from "../../assets/icon/timeline.svg";
 import underArrow from "../../assets/icon/under_arrow.png";
 
 import QueueCard from "./QueueCard.jsx";
 
 import { getNowMinutesKST, nowLabelKST, minutesToLabel12h } from "../../utils/timeKst.js";
-import { placeQueueItems } from "../../utils/queuePlacement.js";
 import { DUMMY_QUEUE_ITEMS } from "../../mocks/agentQueueItems.js";
 
-const ITEM_DURATION_MIN = 45;
+// ✅ 1칸 = 1시간
+const ITEM_DURATION_MIN = 60;
+
+// ✅ "HH:MM" -> minutes (0~1439)
+function atToMinutes(at) {
+    const [hh, mm] = at.split(":").map((x) => parseInt(x, 10));
+    return hh * 60 + mm;
+}
 
 export default function AgentQueueSection() {
-    // 1) 360px = 45분 => 1분 = 8px
-    const PX_PER_MIN = 360 / ITEM_DURATION_MIN; // 8
-    const DAY_MIN=60*24;
-    const GRID_W = DAY_MIN * PX_PER_MIN;
+    // ✅ 360px = 60분 => 1분 = 6px
+    const PX_PER_MIN = 360 / ITEM_DURATION_MIN; // 6
+    const DAY_MIN = 60 * 24; // 1440
 
-// 2) 추가 격자(45분 단위)
-    const slotMarks = useMemo(() => {
-        const arr = [];
-        for (let m = 0; m <= DAY_MIN; m += ITEM_DURATION_MIN) arr.push(m);
-        return arr;
-    }, []);
+    // ✅ 00:00 ~ 24:00 고정
+    const windowStartMin = 0;
+    const windowEndMin = DAY_MIN;
+    const GRID_W = (windowEndMin - windowStartMin) * PX_PER_MIN + 340;
 
-    const ROW_PADDING_Y = 10;      // ✅ 추가
-    const ROW_H = 132;             // ✅ 112 -> 132 (위아래 10px씩 더 여유)
+    const ROW_PADDING_Y = 10;
+    const ROW_H = 132;
     const CARD_TOP_OFFSET = ROW_PADDING_Y;
 
     const VIEW_ROWS = 3.5;
@@ -37,13 +39,13 @@ export default function AgentQueueSection() {
     const [nowMin, setNowMin] = useState(() => getNowMinutesKST());
     const [nowText, setNowText] = useState(() => nowLabelKST());
 
-    //공통hover
-     const filterBtnCls =
-           "h-[44px] px-5 rounded-[10px] border bg-white text-[16px] font-semibold " +
-           "text-[#8C8C8C] flex items-center gap-2 " +
-           "cursor-pointer transition-all duration-150 " +
-           "hover:-translate-y-[1px] hover:border-[#CFCFCF] hover:bg-[#FAFAFA] hover:shadow-sm " +
-           "active:translate-y-0";
+    // 공통 hover
+    const filterBtnCls =
+        "h-[44px] px-5 rounded-[10px] border bg-white text-[16px] font-semibold " +
+        "text-[#8C8C8C] flex items-center gap-2 " +
+        "cursor-pointer transition-all duration-150 " +
+        "hover:-translate-y-[1px] hover:border-[#CFCFCF] hover:bg-[#FAFAFA] hover:shadow-sm " +
+        "active:translate-y-0";
 
     useEffect(() => {
         const id = setInterval(() => {
@@ -53,12 +55,67 @@ export default function AgentQueueSection() {
         return () => clearInterval(id);
     }, []);
 
-    const nowX = nowMin * PX_PER_MIN;
+    const nowX = (nowMin - windowStartMin) * PX_PER_MIN;
 
-    const { placedItems, rowCount } = useMemo(
-        () => placeQueueItems(DUMMY_QUEUE_ITEMS, ITEM_DURATION_MIN),
-        []
-    );
+    // ✅ 헤더 시간: 1시간마다 표기 (24시는 제외)
+    const hourMarks = useMemo(() => {
+        const arr = [];
+        for (let h = 0; h < 24; h += 1) arr.push(h * 60); // 0~23
+        return arr;
+    }, []);
+
+    /**
+     * ✅ 배치 규칙 (사진1처럼)
+     * - 카드 left는 "해당 시간대의 정시(버킷 시작)"로 스냅
+     * - 같은 시간 칸 안에서는 실제 시작시간이 빠를수록 위(row 0)
+     * - rowCount = 한 시간 칸에 쌓이는 최대 개수
+     */
+    const { placedItems, rowCount } = useMemo(() => {
+        // 1) 원본에 startMin(실제 시작시간) 추가
+        const items = DUMMY_QUEUE_ITEMS.map((it) => {
+            const startMin = atToMinutes(it.at);
+            const bucketStartMin = Math.floor(startMin / 60) * 60; // ✅ 10:05 -> 10:00
+            return {
+                ...it,
+                startMin,
+                bucketStartMin,     // ✅ 시각적 칸 시작점
+            };
+        });
+
+        // 2) 시간 칸(버킷)별로 그룹화
+        const map = new Map(); // key: bucketStartMin, value: items[]
+        for (const it of items) {
+            const key = it.bucketStartMin;
+            if (!map.has(key)) map.set(key, []);
+            map.get(key).push(it);
+        }
+
+        // 3) 각 버킷 내에서 실제 시작시간 오름차순 정렬 후 row 부여(0부터)
+        let maxRows = 0;
+        const placed = [];
+
+        for (const [bucketStartMin, arr] of map.entries()) {
+            arr.sort((a, b) => a.startMin - b.startMin);
+
+            maxRows = Math.max(maxRows, arr.length);
+
+            arr.forEach((it, idx) => {
+                placed.push({
+                    ...it,
+                    row: idx,                 // ✅ 같은 시간 칸에서 위->아래
+                    visualStartMin: bucketStartMin, // ✅ left는 정시로 고정
+                });
+            });
+        }
+
+        // 4) 전체 정렬: 시간 칸 오름차순 → 같은 시간 칸에서는 실제 시작시간 오름차순
+        placed.sort((a, b) => {
+            if (a.visualStartMin !== b.visualStartMin) return a.visualStartMin - b.visualStartMin;
+            return a.startMin - b.startMin;
+        });
+
+        return { placedItems: placed, rowCount: maxRows };
+    }, [nowMin]);
 
     const ROWS = rowCount;
     const GRID_H = ROWS * ROW_H;
@@ -71,26 +128,20 @@ export default function AgentQueueSection() {
         el.scrollLeft = Math.max(0, nowX - 420);
     }, [nowX]);
 
+    // ✅ overscroll/이상 스크롤 방지
     useEffect(() => {
-           const el = scrollerRef.current;
-           if (!el) return;
+        const el = scrollerRef.current;
+        if (!el) return;
 
-               const clamp = () => {
-                 const max = Math.max(0, el.scrollWidth - el.clientWidth);
-                 if (el.scrollLeft < 0) el.scrollLeft = 0;
-                 if (el.scrollLeft > max) el.scrollLeft = max;
-               };
+        const clamp = () => {
+            const max = Math.max(0, el.scrollWidth - el.clientWidth);
+            if (el.scrollLeft < 0) el.scrollLeft = 0;
+            if (el.scrollLeft > max) el.scrollLeft = max;
+        };
 
-               el.addEventListener("scroll", clamp, { passive: true });
-           // 초기 1회도 clamp
-               clamp();
-           return () => el.removeEventListener("scroll", clamp);
-         }, []);
-
-    const hourMarks = useMemo(() => {
-        const arr = [];
-        for (let h = 0; h <= 24; h += 3) arr.push(h * 60);
-        return arr;
+        el.addEventListener("scroll", clamp, { passive: true });
+        clamp();
+        return () => el.removeEventListener("scroll", clamp);
     }, []);
 
     return (
@@ -109,32 +160,26 @@ export default function AgentQueueSection() {
 
                 {/* 우측 필터 */}
                 <div className="flex items-center gap-3">
-                    <button
-                        type="button"
-                        className={[filterBtnCls, "border-[#E4E4E4]"].join(" ")}
-                    >
+                    <button type="button" className={[filterBtnCls, "border-[#E4E4E4]"].join(" ")}>
                         브랜드
                         <img src={underArrow} alt="" className="w-4 h-4 opacity-80" />
                     </button>
 
-                    <button
-                        type="button"
-                        className={[filterBtnCls, "border-[#E4E4E4]"].join(" ")}
-                    >
-                        조정
+                    <button type="button" className={[filterBtnCls, "border-[#E4E4E4]"].join(" ")}>
+                        필터
                         <img src={underArrow} alt="" className="w-4 h-4 opacity-80" />
                     </button>
 
                     <div
-                    className={[
-                       "h-[44px] px-5 rounded-[10px] border border-[#E2E2E2] bg-white flex items-center gap-2",
-                       "cursor-pointer transition-all duration-150",
-                       "hover:-translate-y-[1px] hover:border-[#CFCFCF] hover:bg-[#FAFAFA] hover:shadow-sm",
-                       "active:translate-y-0",
+                        className={[
+                            "h-[44px] px-5 rounded-[10px] border border-[#E2E2E2] bg-white flex items-center gap-2",
+                            "cursor-pointer transition-all duration-150",
+                            "hover:-translate-y-[1px] hover:border-[#CFCFCF] hover:bg-[#FAFAFA] hover:shadow-sm",
+                            "active:translate-y-0",
                         ].join(" ")}
                     >
                         <img src={calendarIcon} alt="" className="w-5 h-5" />
-                        <span className="text-[16px] font-semibold text-[#8C8C8C]">2025 / 12 / 27</span>
+                        <span className="text-[16px] font-semibold text-[#8C8C8C]">2026 / 01 / 02</span>
                     </div>
                 </div>
             </div>
@@ -145,19 +190,16 @@ export default function AgentQueueSection() {
                     className="relative overflow-x-auto overflow-y-auto bg-white overscroll-x-none"
                     style={{ height: 44 + VIEW_H }}
                 >
-                    <div
-                        className="relative"
-                        style={{ width: GRID_W, height: 44 + Math.max(GRID_H, VIEW_H) }}
-                    >
+                    <div className="relative" style={{ width: GRID_W, height: 44 + Math.max(GRID_H, VIEW_H) }}>
                         {/* 시간 라벨 바 */}
                         <div className="absolute top-0 left-0 h-[44px] bg-[#001A4C]" style={{ width: GRID_W }}>
                             {hourMarks.map((m) => (
                                 <div
                                     key={m}
-                                    className="absolute top-0 h-full flex items-center justify-center text-white text-[16px] font-m3dium"
+                                    className="absolute top-0 h-full flex items-center justify-center text-white text-[16px] font-medium"
                                     style={{
-                                        left: m * PX_PER_MIN,
-                                        width: 3 * 60 * PX_PER_MIN,
+                                        left: (m - windowStartMin) * PX_PER_MIN,
+                                        width: 60 * PX_PER_MIN, // 1시간 폭
                                     }}
                                 >
                                     {minutesToLabel12h(m)}
@@ -170,71 +212,24 @@ export default function AgentQueueSection() {
                             className="absolute left-0"
                             style={{ top: 44, width: GRID_W, height: Math.max(GRID_H, VIEW_H) }}
                         >
-                            {/*  배경 레이어 (음영/격자/행라인) */}
-                            <div className="absolute inset-0 z-0">
-                                {/* 지난 시간 음영 */}
-                                <div
-                                    className="absolute top-0 left-0 h-full bg-[#EEF2FA]"
-                                    style={{ width: Math.max(0, nowX) }}
-                                />
-
-                                {/* 3시간 단위 세로 점선 */}
-                                {hourMarks.map((m) => (
-                                    <div
-                                        key={`grid-3h-${m}`}
-                                        className="absolute top-0 h-full border-l border-dashed border-[#E2E2E2]"
-                                        style={{ left: m * PX_PER_MIN }}
-                                    />
-                                ))}
-
-                                {/* ✅ 45분(=카드 폭) 단위 점선 (더 연하게) */}
-                                {slotMarks.map((m) => (
-                                    <div
-                                        key={`grid-45m-${m}`}
-                                        className="absolute top-0 h-full border-l border-dashed border-[#F0F0F0] "
-                                        style={{ left: m * PX_PER_MIN }}
-                                    />
-                                ))}
-
-                                {/* 행 가이드 */}
-                                {Array.from({ length: ROWS }).map((_, i) => (
-                                    <div
-                                        key={`row-${i}`}
-                                        className="absolute left-0 w-full border-t border-[#F1F1F1]"
-                                        style={{ top: i * ROW_H }}
-                                    />
-                                ))}
-                            </div>
-
-                            {/* ✅ 현재시간 점선: 카드보다 뒤로 (가려지게) */}
-                            <div
-                                className="absolute top-0 h-full z-[5] border-l-2 border-dashed border-[#001A4C]"
-                                style={{ left: nowX }}
-                            />
-
-                            {/* ✅ 카드: 점선보다 위 */}
-
-                            <div className="absolute inset-0 z-10   ">
+                            {/* ✅ 카드 */}
+                            <div className="absolute inset-0 z-10">
                                 {placedItems.map((item) => {
-                                    const left = item.startMin * PX_PER_MIN;
-                                    const top = item.row * ROW_H + CARD_TOP_OFFSET;   // ✅ 변경
+                                    const cellW = 60 * PX_PER_MIN; // 1시간 칸 폭 (360)
+                                    const left =
+                                    (item.visualStartMin - windowStartMin) * PX_PER_MIN + cellW / 2; // ✅ 중앙(시간 글자 위치)에서 시작
+
+                                    const top = item.row * ROW_H + CARD_TOP_OFFSET;
+
+                                    // ✅ 실행완료(시간 지남): 시작+1시간 <= nowMin 이면 완료 처리
+                                    const isDone = item.startMin + 60 <= nowMin;
 
                                     return (
                                         <div key={item.id} className="absolute cursor-pointer" style={{ left, top }}>
-                                            <QueueCard item={item} />
+                                            <QueueCard item={item} done={isDone} />
                                         </div>
                                     );
                                 })}
-                            </div>
-
-                            {/* ✅ 타임라인 배지: 가장 위 */}
-                            <div className="absolute z-20" style={{ left: nowX - 6, top: 210 }}>
-                                <div className="relative">
-                                    <img src={timelineIcon} alt="" className="h-[30px] w-auto" />
-                                    <span className="absolute inset-0 flex items-center justify-center text-white text-[14px] font-semibold">
-                  {nowText}
-                </span>
-                                </div>
                             </div>
                         </div>
                     </div>

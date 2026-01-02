@@ -6,9 +6,10 @@ import navigatePrev from "../../assets/icon/NavigatePrevious.svg";
 import navigateNext from "../../assets/icon/NavigateNext.svg";
 import Brand from "../ui/Brand.jsx";
 
-import { DUMMY_CARDS } from "../../mocks/agentStatusCards.js";
+// ✅ DB 단일 소스 사용
+import { campaigns as CAMPAIGNS } from "../../mocks/db/campaigns.js";
 
-//  실행중/긴급중단
+// 실행중/긴급중단
 function Status({ children, tone = "pink" }) {
     if (tone === "pink") {
         return (
@@ -22,8 +23,8 @@ function Status({ children, tone = "pink" }) {
                     "text-[#FF2571] font-semibold text-[14px]",
                 ].join(" ")}
             >
-                {children}
-            </span>
+        {children}
+      </span>
         );
     }
 
@@ -37,13 +38,12 @@ function Status({ children, tone = "pink" }) {
                 "font-Semibold text-[14px]",
             ].join(" ")}
         >
-            {children}
-        </span>
+      {children}
+    </span>
     );
 }
 
 function AgentCard({ card }) {
-    // ✅ "긴급 중단" 카드도 클릭/hover 가능해야 하므로, disabled는 "진짜 비활성"이 아니라 "스타일"만 의미
     const isDisabledTheme = card.theme === "disabled";
     const navigate = useNavigate();
     const location = useLocation();
@@ -51,10 +51,10 @@ function AgentCard({ card }) {
     const cardCls = [
         "rounded",
         "shadow-[0_0_8px_rgba(0,0,0,0.1)]",
-        "border border-[#EFEFEF]",
+        "border border-[#EFEFEF] rounded-2xl",
         "transition-transform duration-200 will-change-transform",
         isDisabledTheme ? "bg-[#F7F7F7]" : "bg-white",
-        "hover:scale-[1.02]", // ✅ 항상 hover 확대
+        "hover:scale-[1.02]",
     ].join(" ");
 
     const kpiBoxCls =
@@ -90,9 +90,11 @@ function AgentCard({ card }) {
                 <div className="grid grid-cols-[32px_1fr] gap-x-2">
                     <img src={card.leftIcon} alt="" className="w-[32px] h-[32px]" />
                     <div className="text-[20px] font-semibold text-[#232323]">{card.title}</div>
+
                     <div className="col-span-2 mt-2 text-[14px] text-[#818181] font-medium leading-[22px] min-h-[44px]">
                         <div className="line-clamp-1">{card.target}</div>
-                        <div className="line-clamp-1">{card.date}</div>
+                        {/* ✅ DB는 dateLabel */}
+                        <div className="line-clamp-1">{card.dateLabel}</div>
                     </div>
                 </div>
 
@@ -107,14 +109,15 @@ function AgentCard({ card }) {
                     <div className="flex items-center justify-between">
                         <span className="text-[16px] text-[#393939] font-medium">핵심 성과</span>
                         <span className={["text-[20px] font-bold", kpiTextCls].join(" ")}>
-                            {card.kpiValue}
-                        </span>
+              {/* ✅ campaigns.js에 kpiValue 넣어두기 */}
+                            {card.kpiValue || "-"}
+            </span>
                     </div>
 
                     <div className="mt-5 h-[16px] w-full rounded-full bg-white overflow-hidden">
                         <div
                             className={["h-full rounded-full", barCls].join(" ")}
-                            style={{ width: `${Math.round(card.progress * 100)}%` }}
+                            style={{ width: `${Math.round((card.progress ?? 0) * 100)}%` }}
                         />
                     </div>
                 </div>
@@ -122,7 +125,6 @@ function AgentCard({ card }) {
                 <div className="mt-7 grid grid-cols-2 gap-4">
                     <button
                         type="button"
-                        // ✅ 긴급중단(회색)도 클릭/hover 가능해야 하므로 disabled 제거
                         className={[
                             "h-[40px] w-[140px] rounded-sm",
                             "text-[18px] font-semibold",
@@ -147,8 +149,7 @@ function AgentCard({ card }) {
 
                     <button
                         type="button"
-                        // ✅ 긴급중단(회색)도 클릭/hover 가능해야 하므로 disabled 제거
-                        onClick={openDetail} //팝업열기
+                        onClick={openDetail}
                         className={[
                             "h-[40px] w-[140px] rounded-sm",
                             "text-[18px] font-semibold",
@@ -181,13 +182,16 @@ export default function AgentStatusSection() {
     const VISIBLE_COUNT = 3;
     const [startIndex, setStartIndex] = useState(0);
 
-    const maxStart = Math.max(0, DUMMY_CARDS.length - VISIBLE_COUNT);
+    // ✅ DB 단일 소스
+    const cards = useMemo(() => CAMPAIGNS, []);
+
+    const maxStart = Math.max(0, cards.length - VISIBLE_COUNT);
     const canPrev = startIndex > 0;
     const canNext = startIndex < maxStart;
 
     const visibleCards = useMemo(() => {
-        return DUMMY_CARDS.slice(startIndex, startIndex + VISIBLE_COUNT);
-    }, [startIndex]);
+        return cards.slice(startIndex, startIndex + VISIBLE_COUNT);
+    }, [cards, startIndex]);
 
     const handlePrev = () => {
         if (!canPrev) return;
@@ -211,60 +215,54 @@ export default function AgentStatusSection() {
                         AI가 성과 분석을 바탕으로 다음 마케팅 전략을 미리 생성하고 실행을 준비하고 있습니다.
                     </p>
                 </div>
-
-                <div className="flex items-center">
-                    <button
-                        type="button"
-                        className={[
-                            "p-0",
-                            canPrev
-                                ? "cursor-pointer transition-transform duration-150 hover:-translate-y-[1px] active:translate-y-0"
-                                : "",
-                        ].join(" ")}
-                        aria-label="Previous"
-                        onClick={handlePrev}
-                        disabled={!canPrev}
-                    >
-                        <img
-                            src={navigatePrev}
-                            alt=""
-                            className={[
-                                "w-[24px] h-[24px]",
-                                !canPrev ? "opacity-30" : "opacity-100",
-                                canPrev ? "hover:opacity-90" : "",
-                            ].join(" ")}
-                        />
-                    </button>
-
-                    <button
-                        type="button"
-                        className={[
-                            "p-0",
-                            canNext
-                                ? "cursor-pointer transition-transform duration-150 hover:-translate-y-[1px] active:translate-y-0"
-                                : "",
-                        ].join(" ")}
-                        aria-label="Next"
-                        onClick={handleNext}
-                        disabled={!canNext}
-                    >
-                        <img
-                            src={navigateNext}
-                            alt=""
-                            className={[
-                                "w-[24px] h-[24px]",
-                                !canNext ? "opacity-30" : "opacity-100",
-                                canNext ? "hover:opacity-90" : "",
-                            ].join(" ")}
-                        />
-                    </button>
-                </div>
             </div>
 
-            <div className="mt-10 grid grid-cols-3 gap-10 overflow-visible">
-                {visibleCards.map((c) => (
-                    <AgentCard key={c.id} card={c} />
-                ))}
+            <div className="relative mt-10">
+                <button
+                    type="button"
+                    aria-label="Previous"
+                    onClick={handlePrev}
+                    disabled={!canPrev}
+                    className={[
+                        "absolute -left-8 top-1/2 -translate-y-1/2 z-10",
+                        "w-[34px] h-[34px]",                 // ✅ 사진처럼 작게
+                        "rounded-[6px]",                      // ✅ 네모 라운드
+                        "bg-white",
+                        "flex items-center justify-center",
+                        "transition-all duration-150",
+                        canPrev
+                            ? "hover:bg-[#F3F3F3] hover:border-[#CFCFCF] hover:shadow-sm active:bg-[#E9E9E9]"
+                            : "opacity-30 cursor-default",
+                    ].join(" ")}
+                >
+                    <img src={navigatePrev} alt="" className="w-[18px] h-[18px]" />
+                </button>
+
+                <button
+                    type="button"
+                    aria-label="Next"
+                    onClick={handleNext}
+                    disabled={!canNext}
+                    className={[
+                        "absolute -right-8 top-1/2 -translate-y-1/2 z-10",
+                        "w-[34px] h-[34px]",
+                        "rounded-[6px]",
+                        "bg-white",
+                        "flex items-center justify-center",
+                        "transition-all duration-150",
+                        canNext
+                            ? "hover:bg-[#F3F3F3] hover:border-[#CFCFCF] hover:shadow-sm active:bg-[#E9E9E9]"
+                            : "opacity-30 cursor-default",
+                    ].join(" ")}
+                >
+                    <img src={navigateNext} alt="" className="w-[18px] h-[18px]" />
+                </button>
+
+                <div className="grid grid-cols-3 gap-10 overflow-visible px-6 ">
+                    {visibleCards.map((c) => (
+                        <AgentCard key={c.id} card={c} />
+                    ))}
+                </div>
             </div>
         </div>
     );
