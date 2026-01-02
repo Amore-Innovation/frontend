@@ -32,9 +32,9 @@ export default function AmorePartyPage() {
 
     useEffect(() => {
         const intent = location.state?.scrollTo;
-        if (!intent) return; // ✅ 스크롤로 URL이 바뀐 경우엔 스크롤하지 않음
+        if (!intent) return; //  스크롤로 URL이 바뀐 경우엔 스크롤하지 않음
 
-        // ✅ 프로그램 스크롤 시작
+        //  프로그램 스크롤 시작
         isProgrammaticScrollRef.current = true;
         if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
 
@@ -46,12 +46,12 @@ export default function AmorePartyPage() {
             if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
 
-        // ✅ 0.8초 정도는 observer가 URL replace 못하게
+        //  0.8초 정도는 observer가 URL replace 못하게
         scrollTimeoutRef.current = setTimeout(() => {
             isProgrammaticScrollRef.current = false;
         }, 800);
 
-        // ✅ state 제거(재렌더 시 중복 실행 방지)
+        //  state 제거(재렌더 시 중복 실행 방지)
         navigate(pathname, { replace: true, state: null });
     }, [pathname, pathToId, location.state, navigate]);
 
@@ -64,7 +64,7 @@ export default function AmorePartyPage() {
 
         const observer = new IntersectionObserver(
             (entries) => {
-                if (isProgrammaticScrollRef.current) return; // ✅ 핵심
+                if (isProgrammaticScrollRef.current) return; //  핵심
 
                 if (rafRef.current) cancelAnimationFrame(rafRef.current);
                 rafRef.current = requestAnimationFrame(() => {
@@ -78,7 +78,7 @@ export default function AmorePartyPage() {
                     const nextPath = idToPath.get(best.target.id);
                     if (!nextPath || nextPath === pathname) return;
 
-                    navigate(nextPath, { replace: true, state: null }); // ✅ state 없이
+                    navigate(nextPath, { replace: true, state: null }); //  state 없이
                 });
             },
             {

@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import PerformanceChart from "./PerformanceChart.jsx";
 import SummaryPanel from "./SummaryPanel.jsx";
-import Brand, { LABEL } from "../ui/Brand.jsx"; // ✅ named import
+import Brand, { LABEL } from "../ui/Brand.jsx"; //  named import
 import graphIcon from "../../assets/icon/graph.svg";
 import calendarIcon from "../../assets/icon/calendar.svg";
 
@@ -48,7 +48,7 @@ export default function PerformanceSection() {
 
     const [tab, setTab] = useState("all");
 
-    // ✅ 브랜드 key로 통일
+    //  브랜드 key로 통일
     const [selectedBrand, setSelectedBrand] = useState("inisfree");
 
     const [selectedMetrics, setSelectedMetrics] = useState(["open", "click"]);
@@ -95,7 +95,7 @@ export default function PerformanceSection() {
         });
     };
 
-    // ✅ AI 요약 멘트: 탭/선택값 따라 변경
+    //  AI 요약 멘트: 탭/선택값 따라 변경
     const aiSummary = useMemo(() => {
         if (tab === "all") {
             return "오픈율과 클릭율이 동반 상승해 메시지 반응도가 전반적으로 개선됐습니다. 전환율도 안정적으로 유지되어 구매로 이어질 가능성이 높아지는 흐름입니다.";
@@ -207,7 +207,7 @@ export default function PerformanceSection() {
                 </div>
 
                 <div className="h-[710px] self-start overflow-hidden">
-                    {/* ✅ aiSummary 전달 */}
+                    {/*  aiSummary 전달 */}
                     <SummaryPanel aiSummary={aiSummary} />
                 </div>
             </div>

@@ -1,4 +1,5 @@
 // src/mocks/db/index.js
+
 import { campaigns } from "./campaigns.js";
 import { users } from "./users.js";
 import { deliveries } from "./deliveries.js";
@@ -19,6 +20,20 @@ export {
     triggers,
 };
 
+// ✅ 캠페인별 "고정 추천상품(풀네임)" 매핑 추가
+const CAMPAIGN_PRODUCT_NAME = {
+    c1: "[리뉴얼]에이시카365 흔적진정세럼pH4.5 60ml", // 에스트라
+    c2: "설화수 자음생 2종 세트",                      // 설화수(찜 상품 혜택 안내)
+    c3: "[NEWCOLOR] 포근 픽싱틴트",                     // 에뛰드
+    c4: "윤조에센스 6세대 120ml(말의 해 에디션)",        // 설화수(연관 상품 추천)
+    c5: "시카페인 트러블리셋 크림 70ml",                 // 비레디
+};
+
+// ✅ 밖에서 쓰게 export
+export function getCampaignProductName(campaignId) {
+    return CAMPAIGN_PRODUCT_NAME[campaignId] || null;
+}
+
 export function findCampaign(campaignId) {
     return campaigns.find((c) => c.id === campaignId) || null;
 }
@@ -37,7 +52,6 @@ export function listUserDeliveries(userId) {
     const user = findUser(userId);
     if (!user) return [];
 
-    // ✅ persona 일치만 + triggerType 기준 중복 제거
     const items = deliveries
         .filter((d) => d.userId === userId && d.personaId === user.personaId)
         .sort((a, b) => new Date(b.sentAt) - new Date(a.sentAt));
@@ -50,7 +64,7 @@ export function listUserDeliveries(userId) {
         deduped.push(d);
     }
 
-    return deduped; // ✅ 결과: 트리거 4개만
+    return deduped;
 }
 
 export function findUserPinnedDelivery({ campaignId, userId }) {

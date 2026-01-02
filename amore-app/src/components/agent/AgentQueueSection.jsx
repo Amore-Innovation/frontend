@@ -10,21 +10,21 @@ import QueueCard from "./QueueCard.jsx";
 import { getNowMinutesKST, nowLabelKST, minutesToLabel12h } from "../../utils/timeKst.js";
 import { DUMMY_QUEUE_ITEMS } from "../../mocks/agentQueueItems.js";
 
-// ✅ 1칸 = 1시간
+//  1칸 = 1시간
 const ITEM_DURATION_MIN = 60;
 
-// ✅ "HH:MM" -> minutes (0~1439)
+//  "HH:MM" -> minutes (0~1439)
 function atToMinutes(at) {
     const [hh, mm] = at.split(":").map((x) => parseInt(x, 10));
     return hh * 60 + mm;
 }
 
 export default function AgentQueueSection() {
-    // ✅ 360px = 60분 => 1분 = 6px
+    //  360px = 60분 => 1분 = 6px
     const PX_PER_MIN = 360 / ITEM_DURATION_MIN; // 6
     const DAY_MIN = 60 * 24; // 1440
 
-    // ✅ 00:00 ~ 24:00 고정
+    //  00:00 ~ 24:00 고정
     const windowStartMin = 0;
     const windowEndMin = DAY_MIN;
     const GRID_W = (windowEndMin - windowStartMin) * PX_PER_MIN + 340;
@@ -57,7 +57,7 @@ export default function AgentQueueSection() {
 
     const nowX = (nowMin - windowStartMin) * PX_PER_MIN;
 
-    // ✅ 헤더 시간: 1시간마다 표기 (24시는 제외)
+    //  헤더 시간: 1시간마다 표기 (24시는 제외)
     const hourMarks = useMemo(() => {
         const arr = [];
         for (let h = 0; h < 24; h += 1) arr.push(h * 60); // 0~23
@@ -65,7 +65,7 @@ export default function AgentQueueSection() {
     }, []);
 
     /**
-     * ✅ 배치 규칙 (사진1처럼)
+     *  배치 규칙 (사진1처럼)
      * - 카드 left는 "해당 시간대의 정시(버킷 시작)"로 스냅
      * - 같은 시간 칸 안에서는 실제 시작시간이 빠를수록 위(row 0)
      * - rowCount = 한 시간 칸에 쌓이는 최대 개수
@@ -74,11 +74,11 @@ export default function AgentQueueSection() {
         // 1) 원본에 startMin(실제 시작시간) 추가
         const items = DUMMY_QUEUE_ITEMS.map((it) => {
             const startMin = atToMinutes(it.at);
-            const bucketStartMin = Math.floor(startMin / 60) * 60; // ✅ 10:05 -> 10:00
+            const bucketStartMin = Math.floor(startMin / 60) * 60; //  10:05 -> 10:00
             return {
                 ...it,
                 startMin,
-                bucketStartMin,     // ✅ 시각적 칸 시작점
+                bucketStartMin,     //  시각적 칸 시작점
             };
         });
 
@@ -102,8 +102,8 @@ export default function AgentQueueSection() {
             arr.forEach((it, idx) => {
                 placed.push({
                     ...it,
-                    row: idx,                 // ✅ 같은 시간 칸에서 위->아래
-                    visualStartMin: bucketStartMin, // ✅ left는 정시로 고정
+                    row: idx,                 //  같은 시간 칸에서 위->아래
+                    visualStartMin: bucketStartMin, //  left는 정시로 고정
                 });
             });
         }
@@ -128,7 +128,7 @@ export default function AgentQueueSection() {
         el.scrollLeft = Math.max(0, nowX - 420);
     }, [nowX]);
 
-    // ✅ overscroll/이상 스크롤 방지
+    //  overscroll/이상 스크롤 방지
     useEffect(() => {
         const el = scrollerRef.current;
         if (!el) return;
@@ -212,16 +212,16 @@ export default function AgentQueueSection() {
                             className="absolute left-0"
                             style={{ top: 44, width: GRID_W, height: Math.max(GRID_H, VIEW_H) }}
                         >
-                            {/* ✅ 카드 */}
+                            {/*  카드 */}
                             <div className="absolute inset-0 z-10">
                                 {placedItems.map((item) => {
                                     const cellW = 60 * PX_PER_MIN; // 1시간 칸 폭 (360)
                                     const left =
-                                    (item.visualStartMin - windowStartMin) * PX_PER_MIN + cellW / 2; // ✅ 중앙(시간 글자 위치)에서 시작
+                                    (item.visualStartMin - windowStartMin) * PX_PER_MIN + cellW / 2; //  중앙(시간 글자 위치)에서 시작
 
                                     const top = item.row * ROW_H + CARD_TOP_OFFSET;
 
-                                    // ✅ 실행완료(시간 지남): 시작+1시간 <= nowMin 이면 완료 처리
+                                    //  실행완료(시간 지남): 시작+1시간 <= nowMin 이면 완료 처리
                                     const isDone = item.startMin + 60 <= nowMin;
 
                                     return (

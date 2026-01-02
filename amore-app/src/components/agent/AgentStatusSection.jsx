@@ -6,7 +6,7 @@ import navigatePrev from "../../assets/icon/NavigatePrevious.svg";
 import navigateNext from "../../assets/icon/NavigateNext.svg";
 import Brand from "../ui/Brand.jsx";
 
-// ✅ DB 단일 소스 사용
+//    DB 단일 소스 사용
 import { campaigns as CAMPAIGNS } from "../../mocks/db/campaigns.js";
 
 // 실행중/긴급중단
@@ -91,14 +91,12 @@ function AgentCard({ card }) {
                     <img src={card.leftIcon} alt="" className="w-[32px] h-[32px]" />
                     <div className="text-[20px] font-semibold text-[#232323]">{card.title}</div>
 
-                    <div className="col-span-2 mt-2 text-[14px] text-[#818181] font-medium leading-[22px] min-h-[44px]">
-                        <div className="line-clamp-1">{card.target}</div>
-                        {/* ✅ DB는 dateLabel */}
-                        <div className="line-clamp-1">{card.dateLabel}</div>
+                    <div className="col-span-2 mt-2 text-[14px] text-[#818181] font-medium">
+                            <div className="line-clamp-1">{card.dateLabel}</div>
                     </div>
                 </div>
 
-                <div className="my-3 h-px bg-[#E5E5E5]" />
+                <div className="my-2 h-px bg-[#E5E5E5]" />
 
                 <div className="flex items-center gap-2">
                     <Status tone={card.status.tone}>{card.status.label}</Status>
@@ -109,7 +107,7 @@ function AgentCard({ card }) {
                     <div className="flex items-center justify-between">
                         <span className="text-[16px] text-[#393939] font-medium">핵심 성과</span>
                         <span className={["text-[20px] font-bold", kpiTextCls].join(" ")}>
-              {/* ✅ campaigns.js에 kpiValue 넣어두기 */}
+              {/*    campaigns.js에 kpiValue 넣어두기 */}
                             {card.kpiValue || "-"}
             </span>
                     </div>
@@ -182,7 +180,7 @@ export default function AgentStatusSection() {
     const VISIBLE_COUNT = 3;
     const [startIndex, setStartIndex] = useState(0);
 
-    // ✅ DB 단일 소스
+    //    DB 단일 소스
     const cards = useMemo(() => CAMPAIGNS, []);
 
     const maxStart = Math.max(0, cards.length - VISIBLE_COUNT);
@@ -225,8 +223,8 @@ export default function AgentStatusSection() {
                     disabled={!canPrev}
                     className={[
                         "absolute -left-8 top-1/2 -translate-y-1/2 z-10",
-                        "w-[34px] h-[34px]",                 // ✅ 사진처럼 작게
-                        "rounded-[6px]",                      // ✅ 네모 라운드
+                        "w-[34px] h-[34px]",                 //    사진처럼 작게
+                        "rounded-[6px]",                      //    네모 라운드
                         "bg-white",
                         "flex items-center justify-center",
                         "transition-all duration-150",

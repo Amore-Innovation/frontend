@@ -7,7 +7,7 @@ import GraphIcon from "../../assets/icon/graph.svg"
 import calendarIcon from "../../assets/icon/calendar.svg"
 import arrowicon from "../../assets/icon/under_arrow.png"
 import searchIcon from "../../assets/icon/search.svg"
-import { findCampaign, listCampaignDeliveries, findUser } from "../../mocks/db/index.js";
+import { findCampaign, listCampaignDeliveries, findUser, getCampaignProductName } from "../../mocks/db/index.js";
 
 function Badge({ tone, label }) {
     const base = [
@@ -91,7 +91,7 @@ export default function CampaignModalPage() {
 
                 return true;
             })
-            // ✅ 여기 추가
+            //  여기 추가
             .sort((a, b) => {
                 const na = Number(a.userId.replace("u", ""));
                 const nb = Number(b.userId.replace("u", ""));
@@ -99,21 +99,21 @@ export default function CampaignModalPage() {
             });
     }, [allDeliveries, q, age, skin, opened, purchased]);
 
-    // 페이지네이션 (✅ 데모용: 1/8 고정, 다음 버튼 활성화만)
+    // 페이지네이션 ( 데모용: 1/8 고정, 다음 버튼 활성화만)
     const PAGE_SIZE = 8;
     const [page, setPage] = useState(1);
 
-    // ✅ 화면에는 1/8로만 보이게 고정
+    //  화면에는 1/8로만 보이게 고정
         const FAKE_TOTAL_PAGES = 8;
         const totalPages = FAKE_TOTAL_PAGES;
-        const pageSafe = 1; // ✅ 항상 1페이지로 고정
+        const pageSafe = 1; //  항상 1페이지로 고정
 
-    // ✅ 실제 데이터는 1페이지 분량만 보여주기
+    //  실제 데이터는 1페이지 분량만 보여주기
         const pageItems = useMemo(() => {
             return filtered.slice(0, PAGE_SIZE);
         }, [filtered]);
 
-    // ✅ 버튼 눌러도 실제로는 페이지 이동 안함(가짜)
+    //  버튼 눌러도 실제로는 페이지 이동 안함(가짜)
         const goPage = () => {};
 
     const openUser = (userId) => {
@@ -223,7 +223,7 @@ export default function CampaignModalPage() {
 
                     {/* 필터/검색 */}
                     <div className="mt-6 flex items-center gap-4">
-                        {/* ✅ 왼쪽 덩어리: 필터 + 달력 */}
+                        {/*  왼쪽 덩어리: 필터 + 달력 */}
                         <div className="flex items-center gap-4">
                             <div className="flex items-center gap-2">
                                 <FilterPill label="나이" />
@@ -257,10 +257,10 @@ export default function CampaignModalPage() {
                             </div>
                         </div>
 
-                        {/* ✅ 가운데 스페이서: 검색을 오른쪽 끝으로 밀어냄 */}
+                        {/*  가운데 스페이서: 검색을 오른쪽 끝으로 밀어냄 */}
                         <div className="flex-1" />
 
-                        {/* ✅ 오른쪽 끝: 검색 */}
+                        {/*  오른쪽 끝: 검색 */}
                         <div
                             className={[
                                 "h-[40px] w-[320px] px-5 rounded-[10px]",
@@ -316,7 +316,7 @@ export default function CampaignModalPage() {
                                         "h-[48px] items-center",
                                     ].join(" ")}
                                 >
-                                    {/* ✅ 아이디: hover underline + 클릭가능 느낌 */}
+                                    {/*  아이디: hover underline + 클릭가능 느낌 */}
                                     <div className="px-4 py-2 text-[14px] font-semibold text-[#232323]">
                                         <span className="cursor-pointer hover:underline">
                                           {u.id}
@@ -328,8 +328,9 @@ export default function CampaignModalPage() {
                                     <div className="px-4 py-2 text-[14px] text-[#232323]">{u.skin}</div>
 
                                     {/* 추천제품 */}
+                                    {/* 추천제품 */}
                                     <div className="px-4 py-2 pl-6 pr-4 border-l border-r border-[#EFEFEF] text-[14px] text-[#232323] truncate">
-                                        {d.product.name}
+                                        {getCampaignProductName(campaignId) || d.product.name}
                                     </div>
 
                                     {/* 열람여부 (border 제거) */}
