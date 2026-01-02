@@ -5,22 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="chore: 빌드">
-      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/campaigns.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/deliveries.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/users.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/pages/modals/CampaignModalPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/pages/modals/CampaignUserModalPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amore-app/src/pages/modals/ModalShell.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/messageTemplates.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/personas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/products.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/reviews.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/triggers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/assets/icon/NavigateNext.svg" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/NavigateNext.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/assets/icon/NavigatePrevious.svg" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/assets/icon/NavigatePrevious.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/assets/icon/timeline.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/agent/AgentAutoLogSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/agent/AgentAutoLogSection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/amore-app/src/components/agent/AgentQueueSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/agent/AgentQueueSection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/amore-app/src/components/agent/AgentStatusSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/agent/AgentStatusSection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/SummaryPanel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/SummaryPanel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/brandMeta.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/agent/QueueCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/agent/QueueCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/agentAutoLogs.js" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/mocks/agentAutoLogs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/agentQueueItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/mocks/agentQueueItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/agentStatusCards.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/db/campaigns.js" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/campaigns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/db/deliveries.js" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/deliveries.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/db/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/db/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/pages/modals/CampaignModalPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/pages/modals/CampaignModalPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/pages/modals/CampaignUserModalPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/pages/modals/CampaignUserModalPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amore-app/src/pages/modals/ModalShell.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/pages/modals/ModalShell.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +123,7 @@
       <workItem from="1766682974625" duration="1428000" />
       <workItem from="1766936872031" duration="21813000" />
       <workItem from="1766990860917" duration="8441000" />
-      <workItem from="1767032136903" duration="24271000" />
+      <workItem from="1767032136903" duration="51290000" />
     </task>
     <task id="LOCAL-00001" summary="초기 세팅">
       <option name="closed" value="true" />
@@ -252,7 +261,23 @@
       <option name="project" value="LOCAL" />
       <updated>1767072466524</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="feat: 팝업페이지 구현">
+      <option name="closed" value="true" />
+      <created>1767150798843</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1767150798843</updated>
+    </task>
+    <task id="LOCAL-00019" summary="chore: 빌드">
+      <option name="closed" value="true" />
+      <created>1767150811649</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1767150811649</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,6 +319,7 @@
     <MESSAGE value="chore" />
     <MESSAGE value="fix: 헤더 및 스크롤링 오류해결" />
     <MESSAGE value="design: hover 기능 구현" />
+    <MESSAGE value="feat: 팝업페이지 구현" />
     <MESSAGE value="chore: 빌드" />
     <option name="LAST_COMMIT_MESSAGE" value="chore: 빌드" />
   </component>

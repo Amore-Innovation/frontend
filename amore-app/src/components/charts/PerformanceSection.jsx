@@ -131,7 +131,7 @@ export default function PerformanceSection() {
                                    ].join(" ")}
                                  >
                             <img src={calendarIcon} alt="" className="w-4 h-4" />
-                            2025 / 12 / 27 - 2025 / 12 / 27
+                            2026 / 01 / 01 - 2026 / 01 / 02
                         </button>
                     </div>
 

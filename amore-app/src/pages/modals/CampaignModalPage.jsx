@@ -4,7 +4,6 @@ import ModalShell from "./ModalShell.jsx";
 
 import Brand from "../../components/ui/Brand.jsx";
 import GraphIcon from "../../assets/icon/graph.svg"
-import messageIcon from "../../assets/icon/Email.svg"
 import calendarIcon from "../../assets/icon/calendar.svg"
 import arrowicon from "../../assets/icon/under_arrow.png"
 import searchIcon from "../../assets/icon/search.svg"
@@ -71,40 +70,51 @@ export default function CampaignModalPage() {
     const filtered = useMemo(() => {
         const lower = q.trim().toLowerCase();
 
-        return allDeliveries.filter((d) => {
-            const u = findUser(d.userId);
-            if (!u) return false;
+        return allDeliveries
+            .filter((d) => {
+                const u = findUser(d.userId);
+                if (!u) return false;
 
-            if (lower) {
-                const target = `${u.maskedId}`.toLowerCase();
-                if (!target.includes(lower)) return false;
-            }
+                if (lower) {
+                    const target = `${u.id}`.toLowerCase();
+                    if (!target.includes(lower)) return false;
+                }
 
-            if (age !== "all" && String(u.age) !== String(age)) return false;
-            if (skin !== "all" && u.skin !== skin) return false;
+                if (age !== "all" && String(u.age) !== String(age)) return false;
+                if (skin !== "all" && u.skin !== skin) return false;
 
-            if (opened === "opened" && !d.opened) return false;
-            if (opened === "not" && d.opened) return false;
+                if (opened === "opened" && !d.opened) return false;
+                if (opened === "not" && d.opened) return false;
 
-            if (purchased === "purchased" && !d.purchased) return false;
-            if (purchased === "not" && d.purchased) return false;
+                if (purchased === "purchased" && !d.purchased) return false;
+                if (purchased === "not" && d.purchased) return false;
 
-            return true;
-        });
+                return true;
+            })
+            // ✅ 여기 추가
+            .sort((a, b) => {
+                const na = Number(a.userId.replace("u", ""));
+                const nb = Number(b.userId.replace("u", ""));
+                return na - nb;
+            });
     }, [allDeliveries, q, age, skin, opened, purchased]);
 
-    // 페이지네이션
+    // 페이지네이션 (✅ 데모용: 1/8 고정, 다음 버튼 활성화만)
     const PAGE_SIZE = 8;
     const [page, setPage] = useState(1);
-    const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-    const pageSafe = Math.min(page, totalPages);
 
-    const pageItems = useMemo(() => {
-        const start = (pageSafe - 1) * PAGE_SIZE;
-        return filtered.slice(start, start + PAGE_SIZE);
-    }, [filtered, pageSafe]);
+    // ✅ 화면에는 1/8로만 보이게 고정
+        const FAKE_TOTAL_PAGES = 8;
+        const totalPages = FAKE_TOTAL_PAGES;
+        const pageSafe = 1; // ✅ 항상 1페이지로 고정
 
-    const goPage = (p) => setPage(Math.min(Math.max(1, p), totalPages));
+    // ✅ 실제 데이터는 1페이지 분량만 보여주기
+        const pageItems = useMemo(() => {
+            return filtered.slice(0, PAGE_SIZE);
+        }, [filtered]);
+
+    // ✅ 버튼 눌러도 실제로는 페이지 이동 안함(가짜)
+        const goPage = () => {};
 
     const openUser = (userId) => {
         navigate(`/agents/campaign/${campaignId}/user/${userId}`, {
@@ -128,7 +138,7 @@ export default function CampaignModalPage() {
         <ModalShell onClose={close} >
 
             {/* body */}
-                <div className="p-8">
+                <div className="p-8 pt-3">
                     {/* 상단 2카드 */}
                     <div className="grid grid-cols-[360px_1fr] gap-6">
 
@@ -186,17 +196,27 @@ export default function CampaignModalPage() {
                                     { k: "열람 고객 수", v: metricBox.openedUsers },
                                     { k: "ROI", v: metricBox.roi },
                                     { k: "목표 달성 정도", v: metricBox.goal },
-                                ].map((x) => (
-                                    <div key={x.k}>
-                                        <div className="text-[16px] font-medium text-[#232323]">{x.k}</div>
-                                        <div className="mt-4 flex items-end gap-2">
-                                            <div className="text-[24px] font-bold text-[#232323]">{x.v.value}</div>
-                                            <div className="text-[16px] font-medium text-[#232323]">
-                                                ({x.v.rate}%)
+                                ].map((x) => {
+                                    const isPercentOnly = x.k === "ROI" || x.k === "목표 달성 정도";
+
+                                    return (
+                                        <div key={x.k}>
+                                            <div className="text-[16px] font-medium text-[#232323]">{x.k}</div>
+
+                                            <div className="mt-4 flex items-end gap-2">
+                                                <div className="text-[24px] font-bold text-[#232323]">
+                                                    {isPercentOnly ? `${x.v.value}%` : x.v.value}
+                                                </div>
+
+                                                {!isPercentOnly && (
+                                                    <div className="text-[16px] font-medium text-[#232323]">
+                                                        ({x.v.rate}%)
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
@@ -232,7 +252,7 @@ export default function CampaignModalPage() {
                             >
                                 <img src={calendarIcon} alt="" className="w-5 h-5" />
                                 <span className="text-[16px] font-semibold text-[#8C8C8C]">
-        2025 / 12 / 27 ~ 2025 / 12 / 17
+        2026 / 01 / 01 ~ 2026 / 01 / 02
       </span>
                             </div>
                         </div>
@@ -299,7 +319,7 @@ export default function CampaignModalPage() {
                                     {/* ✅ 아이디: hover underline + 클릭가능 느낌 */}
                                     <div className="px-4 py-2 text-[14px] font-semibold text-[#232323]">
                                         <span className="cursor-pointer hover:underline">
-                                          {u.maskedId}
+                                          {u.id}
                                         </span>
                                     </div>
 

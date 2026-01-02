@@ -10,7 +10,6 @@ const tabs = [
 
 export default function Header() {
     const navigate = useNavigate();
-    const { pathname } = useLocation();
 
     const handleLogoClick = () => {
         navigate("/charts", { state: { scrollTo: "top" } });
