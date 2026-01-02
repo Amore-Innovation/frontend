@@ -49,8 +49,8 @@ export const messageTemplates = [
     {
         id: "t_p1_abandoned_search",
         personaId: "p1",
-        triggerType: "CART_ABANDON",            // ✅ 변경
-        triggerName: "장바구니 리마인드 (추가)", // ✅ 변경
+        triggerType: "CART_ABANDON",            //  변경
+        triggerName: "장바구니 리마인드 (추가)", //  변경
         messageTitle: "🔍 찾으시던 [에이시카 흔적세럼] 최저가 확인!",
         messageBody:
             "끈적임 없는 진정템 찾으셨나요? 🙅‍♀️ 에스트라 에이시카365 흔적진정세럼은 바르자마자 싹- 흡수되는 산뜻함이 매력! ✨ phm0*님이 극찬한 이 제품, 오직 {이름}님께만 40% 특별가 21,600원에 제안드려요. 🌱 더 늦기 전에 클릭!",
@@ -123,8 +123,8 @@ export const messageTemplates = [
     {
         id: "t_p2_abandoned_search",
         personaId: "p2",
-        triggerType: "CART_ABANDON",            // ✅ 변경
-        triggerName: "장바구니 리마인드 (추가)", // ✅ 변경
+        triggerType: "CART_ABANDON",            //  변경
+        triggerName: "장바구니 리마인드 (추가)", //  변경
         messageTitle: "🔍 찾으시던 프리미엄 선물, [설화수 자음생]이 정답입니다",
         messageBody:
             "품격 있는 안티에이징 선물을 찾고 계신가요? 👑 설화수 자음생 2종 세트는 탄력과 윤기를 동시에 선사하는 가장 완벽한 구성입니다. ✨ 지금 바로 40% 혜택가 144,000원으로 어머니께 잊지 못할 감동을 선물해 보세요. 🌱",
@@ -319,7 +319,7 @@ export const messageTemplates = [
         id: "t_p5_cross_sell",
         personaId: "p5",
         triggerType: "CROSS_SELL",
-        triggerName: "연관 상품 추천", // ✅ 변경
+        triggerName: "연관 상품 추천", //  변경
         messageTitle: "🤝 트러블 졸업하고 싶으면 무조건 이거!",
         messageBody:
             "{이름}님, 세안 후 이거 하나만 발라도 피부가 달라집니다. 🌱 카페인 성분으로 붓기 빼고 시카로 진정까지! 🧤 딱 24,500원에 트러블 흔적 싹- 리셋하세요. 후회 없는 선택입니다. 💰",

@@ -6,7 +6,7 @@ export default function QueueCard({ item, done = false }) {
     return (
         <div
             className={[
-                // ✅ 1칸=1시간 => 360px 유지
+                //  1칸=1시간 => 360px 유지
                 "w-[340px] rounded-[12px] px-5 py-4",
                 done ? "bg-[#D7D7D7]" : "bg-[#F7F7F7]",
                 "transition-all duration-150 will-change-transform",
@@ -24,8 +24,7 @@ export default function QueueCard({ item, done = false }) {
                 <Brand brand={item.brand} variant="display" />
             </div>
 
-            <div className="mt-2 text-[16px] text-[#818181] font-medium">대상 : {item.target}</div>
-            <div className="mt-1 text-[16px] text-[#818181] font-medium">
+            <div className="mt-9 text-[16px] text-[#818181] font-medium">
                 발송 예정 : 2026 . JAN 2 . {item.at} A.M
             </div>
         </div>
