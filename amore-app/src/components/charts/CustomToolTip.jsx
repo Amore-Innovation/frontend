@@ -15,11 +15,11 @@ export default function ChartTooltip({ active, payload, label }) {
                 <div className="text-[#12B981]">
                     오픈율 : {map.open}
                 </div>
-                <div className="text-[#1F5796]">
-                    구매 전환율 : {map.conv}
-                </div>
                 <div className="text-[#FF25C8]">
                     클릭율 : {map.click}
+                </div>
+                <div className="text-[#1F5796]">
+                    구매 전환율 : {map.conv}
                 </div>
             </div>
         </div>
