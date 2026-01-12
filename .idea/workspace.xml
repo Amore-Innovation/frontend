@@ -4,12 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="design: 세부수정">
+    <list default="true" id="39af523b-3420-44f0-a948-1899a94f0455" name="Changes" comment="design: 세부수정2">
+      <change afterPath="$PROJECT_DIR$/image/Architecture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/amoreparty.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/flowDiiagram.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/front1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/front2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/front3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/front4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/front5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/front6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/langraph.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/problem.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/CustomToolTip.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/CustomToolTip.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/components/charts/PerformanceSection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/mocks/db/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/mocks/db/products.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amore-app/src/pages/modals/CampaignModalPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/amore-app/src/pages/modals/CampaignModalPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,34 +52,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JavaScript Debug.localhost:5173.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/emfpdlzj/Desktop/Amore-frontend/amore-app/src/assets/agents&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript Debug.localhost:5173.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "/Users/emfpdlzj/Desktop/Amore-frontend/image",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/image" />
       <recent name="$PROJECT_DIR$/amore-app/src/assets/agents" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/amore-app/src/components" />
       <recent name="$PROJECT_DIR$/amore-app/src" />
       <recent name="$PROJECT_DIR$/amore-app/src/assets/icon" />
       <recent name="$PROJECT_DIR$/amore-app/src/assets/agents" />
-      <recent name="$PROJECT_DIR$/amore-app/src/assets/charts" />
     </key>
   </component>
   <component name="RunManager">
@@ -105,6 +114,8 @@
       <workItem from="1766990860917" duration="8441000" />
       <workItem from="1767032136903" duration="61840000" />
       <workItem from="1767413839719" duration="3563000" />
+      <workItem from="1767510398413" duration="20000" />
+      <workItem from="1768202387531" duration="2078000" />
     </task>
     <task id="LOCAL-00001" summary="초기 세팅">
       <option name="closed" value="true" />
@@ -274,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767365544361</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="design: 세부수정2">
+      <option name="closed" value="true" />
+      <created>1767510414630</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1767510414630</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,7 +339,8 @@
     <MESSAGE value="chore: 빌드" />
     <MESSAGE value="feat: 예선 제출용 기능 제작 완료" />
     <MESSAGE value="design: 세부수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="design: 세부수정" />
+    <MESSAGE value="design: 세부수정2" />
+    <option name="LAST_COMMIT_MESSAGE" value="design: 세부수정2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
