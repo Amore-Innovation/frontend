@@ -175,9 +175,7 @@ export default function CampaignModalPage() {
                             <div className="mt-5 h-px bg-[#DFDFDF]" />
 
                             {/* 4) 대상/기간 (아래로) */}
-                            <div className="mt-5 text-[14px] font-semibold text-[#545454] leading-6">
-                                대상 : {campaign.target}
-                                <br />
+                            <div className="mt-3 text-[14px] font-semibold text-[#545454] leading-6">
                                 기간 : {campaign.period.start} - {campaign.period.end}
                             </div>
                         </div>

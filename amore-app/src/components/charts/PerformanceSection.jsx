@@ -29,12 +29,12 @@ const METRIC_LABEL = {
 };
 
 const DUMMY_SERIES = [
-    { date: "Dec 21", open: 80, click: 45, conv: 20, roi: 30 },
-    { date: "Dec 22", open: 95, click: 55, conv: 35, roi: 40 },
-    { date: "Dec 23", open: 130, click: 50, conv: 28, roi: 35 },
-    { date: "Dec 24", open: 175, click: 105, conv: 33, roi: 60 },
-    { date: "Dec 25", open: 200, click: 110, conv: 33, roi: 60 },
-    { date: "Dec 26", open: 220, click: 140, conv: 28, roi: 35 },
+    { date: "Dec 28", open: 80, click: 45, conv: 20, roi: 30 },
+    { date: "Dec 29", open: 95, click: 55, conv: 35, roi: 40 },
+    { date: "Dec 30", open: 130, click: 50, conv: 28, roi: 35 },
+    { date: "Dec 31", open: 175, click: 105, conv: 33, roi: 60 },
+    { date: "JAN 01", open: 200, click: 110, conv: 33, roi: 60 },
+    { date: "JAN 02", open: 220, click: 140, conv: 28, roi: 35 },
 ];
 
 export default function PerformanceSection() {
