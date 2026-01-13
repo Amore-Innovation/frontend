@@ -1,0 +1,45 @@
+{offset: 0, limit: 10, totalCount: 2065, memberAttrTgtYn: "Y",…
+}
+limit
+: 10
+memberAttrTgtYn
+: "Y"
+offset
+: 0
+prodReviewList
+: [
+  {prodReviewSn: 5966435, prodReviewTypeCode: "OneMonth", prodReviewTitle: null,…
+  },…
+]
+0
+: {prodReviewSn: 5966435, prodReviewTypeCode: "OneMonth", prodReviewTitle: null,…
+}
+1
+: {prodReviewSn: 5966429, prodReviewTypeCode: "OneMonth", prodReviewTitle: null,…
+}
+2
+: {prodReviewSn: 5964732, prodReviewTypeCode: "Pur", prodReviewTitle: null,…
+}
+3
+: {prodReviewSn: 5964596, prodReviewTypeCode: "Pur", prodReviewTitle: null,…
+}
+4
+: {prodReviewSn: 5963524, prodReviewTypeCode: "Pur", prodReviewTitle: null,…
+}
+5
+: {prodReviewSn: 5963359, prodReviewTypeCode: "Pur", prodReviewTitle: null,…
+}
+6
+: {prodReviewSn: 5963345, prodReviewTypeCode: "Pur", prodReviewTitle: null,…
+}
+7
+: {prodReviewSn: 5961540, prodReviewTypeCode: "OneMonth", prodReviewTitle: null,…
+}
+8
+: {prodReviewSn: 5961528, prodReviewTypeCode: "OneMonth", prodReviewTitle: null,…
+}
+9
+: {prodReviewSn: 5961395, prodReviewTypeCode: "OneMonth", prodReviewTitle: null,…
+}
+totalCount
+: 2065

@@ -1,0 +1,102 @@
+0
+: {prodReviewSn: 5966435, prodReviewTypeCode: "OneMonth", prodReviewTitle: null,…
+}
+giftServiceLimitedYn
+: "N"
+imgList
+: [
+  {prodReviewImgSn: 4916047, sortOrder: 1, detailSortOrder: 1,…
+  }
+]
+0
+: {prodReviewImgSn: 4916047, sortOrder: 1, detailSortOrder: 1,…
+}
+isBlock
+: false
+memberId
+: "xhdl**"
+memberSn
+: 8226648
+memberStatus
+: "Normal"
+naverId
+: null
+oneLineDesc
+: null
+prodName
+: "4호 로즈 브릭"
+prodReviewBodyText
+: "촉촉하고 부드럽게 발리고 색도 예쁩니다"
+prodReviewRegistDt
+: "2025-12-19T19:43:17.8508+0900"
+prodReviewSn
+: 5966435
+prodReviewTitle
+: null
+prodReviewTypeCode
+: "OneMonth"
+profile
+: {nickName: "xhdl**",…
+}
+recommendCnt
+: 0
+recommendYn
+: "N"
+reportCnt
+: 0
+reportYn
+: "N"
+rvAnalyticsScore
+: 0
+scope
+: 5
+surveys
+: [
+  {questionHeader: "지속력", responseBodyText: "적당해요", memberAttrTgtYn: "N"
+  },…
+]
+0
+: {questionHeader: "지속력", responseBodyText: "적당해요", memberAttrTgtYn: "N"
+}
+memberAttrTgtYn
+: "N"
+questionHeader
+: "지속력"
+responseBodyText
+: "적당해요"1
+: {questionHeader: "유분기", responseBodyText: "보통이에요", memberAttrTgtYn: "N"
+}
+memberAttrTgtYn
+: "N"
+questionHeader
+: "유분기"
+responseBodyText
+: "보통이에요"2
+: {questionHeader: "촉촉함", responseBodyText: "보통이에요", memberAttrTgtYn: "N"
+}
+memberAttrTgtYn
+: "N"
+questionHeader
+: "촉촉함"
+responseBodyText
+: "보통이에요"3
+: {questionHeader: "피부타입(절대 수정/삭제 금지)", responseBodyText: "건성", memberAttrTgtYn: "Y"
+}
+memberAttrTgtYn
+: "Y"
+questionHeader
+: "피부타입(절대 수정/삭제 금지)"
+responseBodyText
+: "건성"4
+: {questionHeader: "피부고민(절대 수정/삭제 금지)", responseBodyText: "주름", memberAttrTgtYn: "Y"
+}
+memberAttrTgtYn
+: "Y"
+questionHeader
+: "피부고민(절대 수정/삭제 금지)"
+responseBodyText
+: "주름"
+tipDoc
+: ""
+userAddAttrInfo
+: "40대/여성/건성/주름"
